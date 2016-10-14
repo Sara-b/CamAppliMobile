@@ -1,32 +1,28 @@
 angular.module('starter.services', [])
 
 .service('registerService', function($http){
-  this.registration = function(email, firstname, lastname, password){
+  this.registration = function(user){
+    console.log('ok');
     return $http({
         method: 'POST',
-        url: 'http://127.0.0.1:1137/register',
+        url: 'http://127.0.0.1:1337/register',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          // 'Access-Control-Allow-Origin': '*',
           'Accept': 'application/json'
         },
         dataType: 'json',
-        data: {
-          'user': {
-            'email': email,
-            'firstname': firstname,
-            'lastname': lastname,
-            'password': password
-          }
-        },
+        data: user
+        ,
         crossDomain: 'true'
       })
       .success(function(response){
         return response;
       })
       .error(function(response){
-        alert('Erreur : ' + response.error);
-        return response.error;
+        // alert('Erreur : ' + response.error);
+        // return response.error;
+        console.log('erreur');
       });
     };
 })

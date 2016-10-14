@@ -22,7 +22,18 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-    <script type="text/javascript" src="http://127.0.0.1:1337/js/dependencies/sails.io.js"></script>
+    <script type="text/javascript" src="/lib/sails.io.js/dist/sails.io.js"></script>
+    <script>io.sails.url = "http://localhost:1337/";</script>
+    <script>
+    io.socket.on('user', function gotHelloMessage (data) {
+  console.log('User alert!', data);
+});
+// Using .get('/user') will retrieve a list of current User models,
+// subscribe this socket to those models, AND subscribe this socket
+// to notifications about new User models when they are created.
+io.socket.get('/user', function gotResponse(body, response) {
+  console.log('Current users: ', body);
+})</script>
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
