@@ -7,8 +7,13 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
   'ionic',
-  'starter.controllers',
-  'starter.services'
+  'starter.controllers.LoginCtrl',
+  'starter.controllers.RegisterCtrl',
+  'starter.controllers.DashboardCtrl',
+  'starter.services.dashboardService',
+  'starter.services.loginService',
+  'starter.services.registerService',
+  'starter.services.userFactory'
   ])
 
 .run(function($ionicPlatform) {
@@ -44,42 +49,6 @@ angular.module('starter', [
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
   .state('tab.register', {
     url: '/register',
     views: {
@@ -97,9 +66,18 @@ angular.module('starter', [
         controller: 'LoginCtrl'
       }
     }
+  })
+  .state('tab.dashboard', {
+    url: '/dashboard',
+    views: {
+      'tab-login': {
+        templateUrl: 'templates/tab-dashboard.html',
+        controller: 'DashboardCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/register');
 
 });
