@@ -45,13 +45,13 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('LoginCtrl', function($scope){
+.controller('LoginCtrl', function($scope, loginService){
   $scope.user = {
-    username: '',
+    email: '',
     password : ''
   }
-
   $scope.login = function(response){
+
     loginService.signin($scope.user)
     .then(function(response){
       console.log(response);
