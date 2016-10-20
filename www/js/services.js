@@ -2,29 +2,47 @@ angular.module('starter.services', [])
 
 .service('registerService', function($http){
   this.registration = function(user){
-    console.log('ok');
     return $http({
         method: 'POST',
         url: 'http://127.0.0.1:1337/register',
         headers: {
           'Content-Type': 'application/json',
-          // 'Access-Control-Allow-Origin': '*',
           'Accept': 'application/json'
         },
         dataType: 'json',
-        data: user
-        ,
+        data: user,
         crossDomain: 'true'
       })
       .success(function(response){
         return response;
       })
       .error(function(response){
-        // alert('Erreur : ' + response.error);
-        // return response.error;
-        console.log('erreur');
+        alert('Erreur : ' + response.error);
+        return response.error;
+        // console.log('erreur');
       });
     };
+})
+
+.service('loginService', function($http){
+  this.signin = function(user){
+    return $http({
+      method: 'POST',
+      url: 'http://127.0.0.1:1337/login',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      dataType: 'json',
+      data: user,
+      crossDomain: 'true'
+    }).success(function(response){
+      return response;
+    }).error(function(response){
+      alert('Erreur : ' + response.error);
+      return response.error;
+    });
+  };
 })
 
 .factory('Chats', function() {

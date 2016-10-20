@@ -28,12 +28,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('RegisterCtrl', function($scope, registerService) {
-  
-
-  // $scope.register = function(){
-  //   console.log($scope.username);
-  // }
-
   $scope.user = {
     lastname :'',
     firstname : '',
@@ -47,6 +41,21 @@ angular.module('starter.controllers', [])
     registerService.registration($scope.user)
     .then(function(response){
       console.log(response);
+    });
+  }
+})
+
+.controller('LoginCtrl', function($scope){
+  $scope.user = {
+    username: '',
+    password : ''
+  }
+
+  $scope.login = function(response){
+    loginService.signin($scope.user)
+    .then(function(response){
+      console.log(response);
+      console.log('connecté');
     });
   }
 });
