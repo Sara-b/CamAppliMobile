@@ -43,6 +43,27 @@ angular.module('starter.services', [])
             });
         };
     })
+    .service('dashboardService', function ($http) {
+        this.dashboard = function (user, token) {
+            return $http({
+                method: 'POST',
+                url: 'http://127.0.0.1:1337/dashboard',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                dataType: 'json',
+                data: [user,token],
+                crossDomain: 'true'
+            }).success(function (response) {
+                return response;
+            }).error(function (response) {
+                return response.error;
+            });
+        };
+    })
+
+
 
     .factory('Chats', function () {
         // Might use a resource here that returns a JSON array
