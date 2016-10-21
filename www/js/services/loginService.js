@@ -12,10 +12,11 @@ angular.module('starter.services.loginService', [])
         data: user,
         crossDomain: 'true'
       }).success(function (response) {
+        console.log(response);
         return response;
       }).error(function (response) {
-        // alert('Erreur : ' + response.error);
-        return response.error;
+        console.log(response);
+        return response;
       });
     };
   });
