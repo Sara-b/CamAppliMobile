@@ -7,12 +7,17 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
   'ionic',
+  'ngResource',
+  'ngRoute',
   'starter.controllers.LoginCtrl',
   'starter.controllers.RegisterCtrl',
   'starter.controllers.DashboardCtrl',
-  'starter.services.dashboardService',
+  'starter.controllers.CameraCtrl',
+
   'starter.services.loginService',
   'starter.services.registerService',
+  'starter.services.CameraService',
+
   'starter.services.userFactory'
   ])
 
@@ -67,11 +72,20 @@ angular.module('starter', [
     }
   })
   .state('tab.dashboard', {
-    url: '/dashboard',
+    url: '/dashboard/:id',
     views: {
       'tab-login': {
         templateUrl: 'templates/tab-dashboard.html',
         controller: 'DashboardCtrl'
+      }
+    }
+  })
+  .state('tab.camera', {
+    url: '/camera/:id',
+    views: {
+      'tab-camera': {
+        templateUrl: 'templates/tab-camera.html',
+        controller: 'CameraCtrl'
       }
     }
   });

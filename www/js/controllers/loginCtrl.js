@@ -9,7 +9,7 @@ angular.module('starter.controllers.LoginCtrl', [])
         password: ''
     }
     $scope.login = function (response) {
-
+      console.log('ok');
       loginService.signin($scope.user)
         .then(function (response) {
 
@@ -24,6 +24,8 @@ angular.module('starter.controllers.LoginCtrl', [])
           $window.sessionStorage.setItem('data', data);
 
           $state.transitionTo('tab.dashboard');
+      },function(err){
+        console.log(err);
       });
     }
   });

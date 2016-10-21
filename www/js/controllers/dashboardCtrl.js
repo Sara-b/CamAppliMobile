@@ -1,19 +1,21 @@
 angular.module('starter.controllers.DashboardCtrl', [])
-  .controller('DashboardCtrl', function ($http, $state, $scope, dashboardService, userFactory) {
-    $scope.isAuth = userFactory.isAuth;
-    $scope.cameras = {};
+  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, userFactory, CameraService) {
+    $scope.user = JSON.parse(userFactory.data);
+    $scope.userid = $scope.user.user.id;
 
-    $scope.data = $http.get('http://127.0.0.1:1337/usercamerarole/1/cameras', {
+    $stateParams.id = $scope.userid;
+
+    $scope.data = $http.get('http://127.0.0.1:1337/usercamerarole/'+ $stateParams.id +'/cameras', {
       method: 'GET',
       headers: {
         "Content-Type": 'application/x-www-form-urlencoded',
         "Authorization": 'JWT ' + userFactory.token
-      }
+      },
+      data: {userid : $stateParams.id}
     })
     .then(function(response){
       $scope.cameras = response.data;
-      console.log($scope.cameras);
+
       return $scope.cameras;
     });
-
-  });
+});
