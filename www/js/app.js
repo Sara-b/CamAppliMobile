@@ -10,10 +10,12 @@ angular.module('starter', [
   'starter.controllers.LoginCtrl',
   'starter.controllers.RegisterCtrl',
   'starter.controllers.DashboardCtrl',
+  'starter.controllers.AddCameraCtrl',
   'starter.services.dashboardService',
   'starter.services.loginService',
   'starter.services.registerService',
-  'starter.services.userFactory'
+  'starter.services.userFactory',
+  'starter.services.addCameraService'
   ])
 
 .run(function($ionicPlatform) {
@@ -30,6 +32,7 @@ angular.module('starter', [
       StatusBar.styleDefault();
     }
   });
+  
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -40,28 +43,42 @@ angular.module('starter', [
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
+  //setup an abstract state for the tabs directive
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
+  .state('mLog', {
+    url: '/mLog',
+    abstract: true,
+    templateUrl: 'templates/tabs.mLog.html'
+  })
+
   // Each tab has its own nav history stack:
 
-  .state('tab.register', {
+  .state('tab.about', {
+    url: '/about',
+    views: {
+      'content': {
+        templateUrl: 'templates/about.html'
+      }
+    }
+  })
+  .state('mLog.register', {
     url: '/register',
     views: {
-      'tab-register': {
+      'mLog-register': {
         templateUrl: 'templates/tab-register.html',
         controller: 'RegisterCtrl'
       }
     }
   })
-  .state('tab.login', {
+  .state('mLog.login', {
     url: '/login',
     views: {
-      'tab-login': {
+      'mLog-login': {
         templateUrl: 'templates/tab-login.html',
         controller: 'LoginCtrl'
       }
@@ -70,14 +87,23 @@ angular.module('starter', [
   .state('tab.dashboard', {
     url: '/dashboard',
     views: {
-      'tab-login': {
+      'content': {
         templateUrl: 'templates/tab-dashboard.html',
         controller: 'DashboardCtrl'
+      }
+    }
+  })
+  .state('tab.addCamera', {
+    url: '/addCamera',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-addCamera.html',
+        controller: 'AddCameraCtrl'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/register');
+  $urlRouterProvider.otherwise('/mLog/register');
 
 });

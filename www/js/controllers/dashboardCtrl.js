@@ -3,8 +3,8 @@ angular.module('starter.controllers.DashboardCtrl', [])
     $scope.isAuth = userFactory.isAuth;
     $scope.data = userFactory.data;
     if($scope.isAuth != true){
-      
+
     }else{
-      $state.go('tab.login');
+      $state.go('tab.mLog.login');
     }
   });
