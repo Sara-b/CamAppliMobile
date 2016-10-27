@@ -32,7 +32,7 @@ angular.module('starter', [
       StatusBar.styleDefault();
     }
   });
-  
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -53,7 +53,7 @@ angular.module('starter', [
   .state('mLog', {
     url: '/mLog',
     abstract: true,
-    templateUrl: 'templates/tabs.mLog.html'
+    templateUrl: 'templates/mLog.html'
   })
 
   // Each tab has its own nav history stack:
