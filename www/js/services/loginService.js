@@ -11,11 +11,6 @@ angular.module('starter.services.loginService', [])
         dataType: 'json',
         data: user,
         crossDomain: 'true'
-      }).success(function (response) {
-        return response;
-      }).error(function (response) {
-        // alert('Erreur : ' + response.error);
-        return response.error;
       });
     };
   });

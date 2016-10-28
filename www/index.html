@@ -37,6 +37,8 @@ io.socket.get('/user', function gotResponse(body, response) {
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -47,11 +49,14 @@ io.socket.get('/user', function gotResponse(body, response) {
     <script src="js/controllers/registerCtrl.js"></script>
     <script src="js/controllers/dashboardCtrl.js"></script>
     <script src="js/controllers/addCameraCtrl.js"></script>
+    <script src="js/controllers/cameraCtrl.js"></script>
+
     <script src="js/services/registerService.js"></script>
     <script src="js/services/loginService.js"></script>
-    <script src="js/services/dashboardService.js"></script>
-    <script src="js/services/userFactory.js"></script>
+    <script src="js/services/cameraService.js"></script>
     <script src="js/services/addCameraService.js"></script>
+
+    <script src="js/services/userFactory.js"></script>
   </head>
   <body ng-app="starter">
     <!--
