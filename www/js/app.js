@@ -13,9 +13,11 @@ angular.module('starter', [
   'starter.controllers.RegisterCtrl',
   'starter.controllers.DashboardCtrl',
   'starter.controllers.CameraCtrl',
+  'starter.controllers.ProfilCtrl',
 
   'starter.services.loginService',
   'starter.services.registerService',
+  'starter.services.profilService',
   'starter.services.CameraService',
 
   'starter.services.userFactory'
@@ -53,6 +55,7 @@ angular.module('starter', [
 
   // Each tab has its own nav history stack:
 
+
   .state('tab.register', {
     url: '/register',
     views: {
@@ -80,6 +83,15 @@ angular.module('starter', [
       }
     }
   })
+    .state('tab.profil', {
+    url: '/profil',
+    views: {
+      'tab-login': {
+        templateUrl: 'templates/tab-profil.html',
+        controller: 'ProfilCtrl'
+      }
+    }
+  })
   .state('tab.camera', {
     url: '/camera/:id',
     views: {
@@ -91,6 +103,6 @@ angular.module('starter', [
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/register');
+  $urlRouterProvider.otherwise('/tab/login');
 
 });
