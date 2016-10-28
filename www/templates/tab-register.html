@@ -1,7 +1,8 @@
 <ion-view view-title="Inscription">
   <ion-content class="padding">
     <div class="list list-inset">
-      <form action="" ng-submit="register()">
+      <p>{{message}}</p>
+      <form ng-submit="register($event)">
         <label for="" class="item item-input">
           <input ng-model="user.username" type="text" placeholder="Username">
         </label>

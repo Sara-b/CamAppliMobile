@@ -1,14 +1,15 @@
 <ion-view view-title="Connexion">
   <ion-content class="padding">
     <div class="list list-inset">
-      <form action="" ng-submit="login()">
+      <p>{{ message }}</p>
+      <form>
         <label for="" class="item item-input">
           <input ng-model="user.email" type="text" placeholder="E-mail">
         </label>
         <label for="" class="item item-input">
           <input ng-model="user.password" type="text" placeholder="Mot de passe">
         </label>
-        <button type="submit" class="button button-block button-positive">
+        <button ng-click="login($event)" type="" class="button button-block button-positive">
           Envoyer
         </button>
       </form>

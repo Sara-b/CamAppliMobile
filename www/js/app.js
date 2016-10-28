@@ -7,15 +7,22 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
   'ionic',
+  'ngResource',
+  'ngRoute',
   'starter.controllers.LoginCtrl',
   'starter.controllers.RegisterCtrl',
   'starter.controllers.DashboardCtrl',
   'starter.controllers.AddCameraCtrl',
-  'starter.services.dashboardService',
+  'starter.controllers.CameraCtrl',
+  'starter.controllers.ProfilCtrl',
+  'starter.controllers.LogoutCtrl',
+
   'starter.services.loginService',
   'starter.services.registerService',
-  'starter.services.userFactory',
-  'starter.services.addCameraService'
+  'starter.services.addCameraService',
+  'starter.services.cameraService',
+
+  'starter.services.userFactory'
   ])
 
 .run(function($ionicPlatform) {
@@ -36,7 +43,6 @@ angular.module('starter', [
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -85,7 +91,7 @@ angular.module('starter', [
     }
   })
   .state('tab.dashboard', {
-    url: '/dashboard',
+    url: '/dashboard/:id',
     views: {
       'content': {
         templateUrl: 'templates/tab-dashboard.html',
@@ -101,9 +107,28 @@ angular.module('starter', [
         controller: 'AddCameraCtrl'
       }
     }
+  })
+  .state('tab.camerasettings', {
+    url: '/camera/:id/settings',
+    views: {
+      'content': {
+          templateUrl: 'templates/tab-camera-settings.html',
+          controller: 'CameraCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/register');
 
-});
+})
+
+  .factory('Interceptor', function($window){
+    var token = window.sessionStorage.getItem('token');
+    return {
+      response: function(config){
+        config.headers['Authorization'] = 'JWT ' + token;
+        return config;
+      }
+    }
+  });
