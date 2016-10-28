@@ -47,47 +47,62 @@ angular.module('starter', [
   $stateProvider
 
   // setup an abstract state for the tabs directive
-  //   .state('tab', {
-  //   url: '/tab',
-  //   abstract: true,
-  //   templateUrl: 'templates/tabs.html'
-  // })
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
 
   // Each tab has its own nav history stack:
 
-  .state('register', {
+  .state('tab.register', {
     url: '/register',
-    templateUrl: 'templates/register.html',
-    controller: 'RegisterCtrl'
+    views: {
+      'tab-register': {
+        templateUrl: 'templates/tab-register.html',
+        controller: 'RegisterCtrl'
+      }
+    }
   })
-  .state('login', {
+  .state('tab.login', {
     url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl'
+    views: {
+      'tab-login': {
+        templateUrl: 'templates/tab-login.html',
+        controller: 'LoginCtrl'
+      }
+    }
   })
-  .state('dashboard', {
-    url: '/dashboard',
-    templateUrl: 'templates/dashboard.html',
-    controller: 'DashboardCtrl'
+  .state('tab.dashboard', {
+    url: '/dashboard/:id',
+    views: {
+      'tab-login': {
+        templateUrl: 'templates/tab-dashboard.html',
+        controller: 'DashboardCtrl'
+      }
+    }
   })
-  .state('logout', {
-    url: '/logout',
-    templateUrl: 'templates/logout.html',
-    controller: 'LogoutCtrl'
-  })
-  .state('profil', {
-    url: '/profil',
-    templateUrl: 'templates/profil.html',
-    controller: 'ProfilCtrl'
-  })
-  .state('camera', {
+  .state('tab.camera', {
     url: '/camera/:id',
-    templateUrl: 'templates/camera.html',
-    controller: 'CameraCtrl'
+    views: {
+      'tab-camera': {
+        templateUrl: 'templates/tab-camera.html',
+        controller: 'CameraCtrl'
+      }
+    }
+  })
+  .state('tab.camerasettings', {
+    url: '/camera/:id/settings',
+    views: {
+      'tab-login': {
+          templateUrl: 'templates/tab-camera-settings.html',
+          controller: 'CameraCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/tab/login');
 
   })
 

@@ -19,4 +19,13 @@ angular.module('starter.controllers.DashboardCtrl', [])
       console.log($scope.cameras);
       return $scope.cameras;
     });
+
+
+    $scope.openSettings = function (cameraid) {
+        //console.log('ok');
+        $state.transitionTo('tab.camera-settings');
+        //  }, function (err) {
+        //      console.log(err);
+        //  });
+    }
 });

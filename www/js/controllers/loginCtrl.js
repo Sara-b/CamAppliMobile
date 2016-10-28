@@ -22,7 +22,7 @@ angular.module('starter.controllers.LoginCtrl', [])
             loginService.setStorage('isAuth', isAuth);
             loginService.setStorage('token', token);
             loginService.setStorage('email', email);
-            $state.go('dashboard');
+            $state.go('tab.dashboard');
           }else{
             console.log($scope.user);
             console.log(response);
