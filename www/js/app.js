@@ -21,6 +21,7 @@ angular.module('starter', [
   'starter.services.registerService',
   'starter.services.addCameraService',
   'starter.services.cameraService',
+  'starter.services.profilService',
 
   'starter.services.userFactory'
   ])
@@ -64,14 +65,6 @@ angular.module('starter', [
 
   // Each tab has its own nav history stack:
 
-  .state('tab.about', {
-    url: '/about',
-    views: {
-      'content': {
-        templateUrl: 'templates/about.html'
-      }
-    }
-  })
   .state('mLog.register', {
     url: '/register',
     views: {
@@ -90,6 +83,14 @@ angular.module('starter', [
       }
     }
   })
+  .state('tab.about', {
+    url: '/about',
+    views: {
+      'content': {
+        templateUrl: 'templates/about.html'
+      }
+    }
+  })
   .state('tab.dashboard', {
     url: '/dashboard/:id',
     views: {
@@ -101,6 +102,24 @@ angular.module('starter', [
   })
   .state('tab.addCamera', {
     url: '/addCamera',
+  views: {
+        'content': {
+          templateUrl: 'templates/tab-dashboard.html',
+          controller: 'DashboardCtrl'
+        }
+      }
+    })
+    .state('tab.profil', {
+    url: '/profil',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-profil.html',
+        controller: 'ProfilCtrl'
+      }
+    }
+  })
+  .state('tab.camera', {
+    url: '/camera/:id',
     views: {
       'content': {
         templateUrl: 'templates/tab-addCamera.html',
