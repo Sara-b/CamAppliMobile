@@ -88,6 +88,15 @@ angular.module('starter', [
         controller: 'CameraCtrl'
       }
     }
+  })
+  .state('tab.camerasettings', {
+    url: '/camera/:id/settings',
+    views: {
+      'tab-login': {
+          templateUrl: 'templates/tab-camera-settings.html',
+          controller: 'CameraCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

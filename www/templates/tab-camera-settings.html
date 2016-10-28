@@ -1,0 +1,28 @@
+﻿<ion-view view-title="CameraSettings">
+    <ion-content class="padding">
+        <div style="height:50px; margin-bottom:20px">
+            <button id="page-button3" style="float:left;" class="button button-light  icon ion-android-menu"></button>
+            <h2 id="page-heading1" style="color:#000000; display:inline" class="title">Propriétés</h2>
+        </div>
+
+        <form action="" ng-submit="">
+            <label class="item item-input" id="page-input1">
+                <span class="input-label">Nouveau nom</span>
+                <input type="text" placeholder="Camera name">
+            </label>
+            <button type="submit" class="button button-block button-positive">
+                Valider
+            </button>
+        </form>
+
+
+        <ul>
+        <!-- <li>{{camera}}</li> -->
+        <li>Nom : {{camera.camera.name}}</li>
+          <li>Etat : {{camera.camera.switchOn}}</li>
+          <li>Socket : {{camera.camera.socket}}</li>
+          <li>Propriétaire : {{camera.user.firstname}} {{camera.user.lastname}} </li>
+        </ul>
+
+    </ion-content>
+</ion-view>
