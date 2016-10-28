@@ -21,6 +21,7 @@ angular.module('starter', [
   'starter.services.registerService',
   'starter.services.addCameraService',
   'starter.services.cameraService',
+  'starter.services.profilService',
 
   'starter.services.userFactory'
   ])
@@ -108,6 +109,24 @@ angular.module('starter', [
       }
     }
   })
+  .state('tab.profil', {
+    url: '/profil',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-profil.html',
+        controller: 'ProfilCtrl'
+      }
+    }
+  })
+  .state('tab.camera', {
+    url: '/camera/:id',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-addCamera.html',
+        controller: 'AddCameraCtrl'
+      }
+    }
+  })
   .state('tab.camerasettings', {
     url: '/camera/:id/settings',
     views: {
@@ -119,7 +138,7 @@ angular.module('starter', [
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/mLog/register');
+  $urlRouterProvider.otherwise('/mLog/login');
 
 })
 
