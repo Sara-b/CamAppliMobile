@@ -13,6 +13,8 @@ angular.module('starter', [
   'starter.controllers.RegisterCtrl',
   'starter.controllers.DashboardCtrl',
   'starter.controllers.CameraCtrl',
+  'starter.controllers.ProfilCtrl',
+  'starter.controllers.LogoutCtrl',
 
   'starter.services.loginService',
   'starter.services.registerService',
@@ -45,52 +47,56 @@ angular.module('starter', [
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
+  //   .state('tab', {
+  //   url: '/tab',
+  //   abstract: true,
+  //   templateUrl: 'templates/tabs.html'
+  // })
 
   // Each tab has its own nav history stack:
 
-  .state('tab.register', {
+  .state('register', {
     url: '/register',
-    views: {
-      'tab-register': {
-        templateUrl: 'templates/tab-register.html',
-        controller: 'RegisterCtrl'
-      }
-    }
+    templateUrl: 'templates/register.html',
+    controller: 'RegisterCtrl'
   })
-  .state('tab.login', {
+  .state('login', {
     url: '/login',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/tab-login.html',
-        controller: 'LoginCtrl'
-      }
-    }
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
   })
-  .state('tab.dashboard', {
-    url: '/dashboard/:id',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/tab-dashboard.html',
-        controller: 'DashboardCtrl'
-      }
-    }
+  .state('dashboard', {
+    url: '/dashboard',
+    templateUrl: 'templates/dashboard.html',
+    controller: 'DashboardCtrl'
   })
-  .state('tab.camera', {
+  .state('logout', {
+    url: '/logout',
+    templateUrl: 'templates/logout.html',
+    controller: 'LogoutCtrl'
+  })
+  .state('profil', {
+    url: '/profil',
+    templateUrl: 'templates/profil.html',
+    controller: 'ProfilCtrl'
+  })
+  .state('camera', {
     url: '/camera/:id',
-    views: {
-      'tab-camera': {
-        templateUrl: 'templates/tab-camera.html',
-        controller: 'CameraCtrl'
-      }
-    }
+    templateUrl: 'templates/camera.html',
+    controller: 'CameraCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/register');
+  $urlRouterProvider.otherwise('/login');
 
-});
+  })
+
+  .factory('Interceptor', function($window){
+    var token = window.sessionStorage.getItem('token');
+    return {
+      response: function(config){
+        config.headers['Authorization'] = 'JWT ' + token;
+        return config;
+      }
+    }
+  });

@@ -1,6 +1,8 @@
 angular.module('starter.controllers.DashboardCtrl', [])
-  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, userFactory, CameraService) {
+  .controller('DashboardCtrl', function ($http, $state, $scope, userFactory, CameraService, $stateParams) {
     $scope.user = JSON.parse(userFactory.data);
+    console.log($scope.user);
+    console.log(userFactory.data);
     $scope.userid = $scope.user.user.id;
 
     $stateParams.id = $scope.userid;
@@ -10,12 +12,11 @@ angular.module('starter.controllers.DashboardCtrl', [])
       headers: {
         "Content-Type": 'application/x-www-form-urlencoded',
         "Authorization": 'JWT ' + userFactory.token
-      },
-      data: {userid : $stateParams.id}
+      }
     })
     .then(function(response){
       $scope.cameras = response.data;
-
+      console.log($scope.cameras);
       return $scope.cameras;
     });
 });
