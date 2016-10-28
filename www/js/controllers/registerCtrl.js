@@ -1,7 +1,7 @@
 angular.module('starter.controllers.RegisterCtrl', [])
   .controller('RegisterCtrl', function ($scope, registerService) {
     $scope.message = '';
-    $scope.user = { lastname: '', firstname: '', password: '', email: '', username: '' };
+    $scope.user = { lastname: '', firstname: '', password: '', email: ''};
     console.log('ok');
 
     $scope.register = function (response) {

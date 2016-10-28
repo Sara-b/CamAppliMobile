@@ -122,7 +122,7 @@ angular.module('starter', [
     url: '/camera/:id',
     views: {
       'content': {
-        templateUrl: 'templates/tab-addCamera.html',
+        templateUrl: 'templates/tab-camera.html',
         controller: 'AddCameraCtrl'
       }
     }

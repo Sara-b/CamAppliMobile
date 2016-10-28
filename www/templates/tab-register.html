@@ -4,9 +4,6 @@
       <p>{{message}}</p>
       <form ng-submit="register($event)">
         <label for="" class="item item-input">
-          <input ng-model="user.username" type="text" placeholder="Username">
-        </label>
-        <label for="" class="item item-input">
           <input ng-model="user.lastname" type="text" placeholder="Nom">
         </label>
         <label for="" class="item item-input">
@@ -18,7 +15,7 @@
         <label for="" class="item item-input">
           <input ng-model="user.password" type="text" placeholder="Mot de passe">
         </label>
-        <button type="submit" class="button button-block button-positive">
+        <button type="submit" class="button button-block button-balanced">
           Envoyer
         </button>
       </form>

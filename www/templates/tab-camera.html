@@ -1,5 +1,24 @@
-<ion-view view-title="Camera">
+<ion-view view-title="{{camera.name}}">
   <ion-content>
-  	
+    <div class="item item-image">
+      <img src="./img/panda.jpg">
+    </div>
+    <div class="item range">
+      <i class="icon ion-arrow-left-b"></i>
+      <input type="range" name="volume">
+      <i class="icon ion-arrow-right-b"></i>
+    </div>
+
+  <div class="tabs-striped tabs-color-assertive">
+    <div class="tabs">
+    <label class="toggle toggle-assertive">
+      <input ng-model="camera.switchOn" type="checkbox">
+      <div class="track">
+        <div class="handle"></div>
+      </div>
+    </label>
+    </div>
+  </div>
+
   </ion-content>
 </ion-view>
