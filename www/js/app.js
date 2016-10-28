@@ -14,6 +14,8 @@ angular.module('starter', [
   'starter.controllers.DashboardCtrl',
   'starter.controllers.AddCameraCtrl',
   'starter.controllers.CameraCtrl',
+  'starter.controllers.ProfilCtrl',
+  'starter.controllers.LogoutCtrl',
 
   'starter.services.loginService',
   'starter.services.registerService',
@@ -105,9 +107,28 @@ angular.module('starter', [
         controller: 'AddCameraCtrl'
       }
     }
+  })
+  .state('tab.camerasettings', {
+    url: '/camera/:id/settings',
+    views: {
+      'content': {
+          templateUrl: 'templates/tab-camera-settings.html',
+          controller: 'CameraCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/register');
 
-});
+})
+
+  .factory('Interceptor', function($window){
+    var token = window.sessionStorage.getItem('token');
+    return {
+      response: function(config){
+        config.headers['Authorization'] = 'JWT ' + token;
+        return config;
+      }
+    }
+  });
