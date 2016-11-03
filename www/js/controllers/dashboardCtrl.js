@@ -13,9 +13,23 @@ angular.module('starter.controllers.DashboardCtrl', [])
         var data = cameraService.getAll(userid);
         data.then(function (response) {
 
-            $scope.cameras = response.data;
-            console.log($scope.cameras);
-            return $scope.cameras;
+        $scope.cameras = response.data;
+
+          for(i = 0; i < $scope.cameras.length; i++){
+            
+            var isOwner;
+            var userId = $scope.cameras[i].user.id;
+            var cameraId = $scope.cameras[i].camera.owner;
+            
+            if(userId == cameraId){
+              $scope.cameras[i].isOwner = true;
+            }else{
+              $scope.cameras[i].isOwner = false;
+            }
+
+            $scope.isOwner = $scope.cameras[i].isOwner;
+          }
+          return $scope.cameras;
         });
 
       $scope.addCamera = function(){
