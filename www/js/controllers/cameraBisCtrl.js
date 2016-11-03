@@ -1,7 +1,6 @@
 angular.module('starter.controllers.CameraBisCtrl', [])
   .controller('CameraBisCtrl', function($state, $scope, $stateParams, cameraService){
-
-     $stateParams.id = 1; 
+      
     camera = cameraService.get($stateParams.id);
 
     $scope.data = "";

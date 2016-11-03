@@ -10,7 +10,7 @@
       <ion-list ng-repeat="camera in cameras" id="page-list1 cam-tab">
           
               <ion-item class="item-icon-right" id="page-list-item4">
-                  <a href="#/tab/camera/{{camera.camera.id}}.html">
+                  <a href="#/tab/camera/{{camera.camera.id}}">
                       {{camera.camera.name}}
                   </a>
                   <a ng-click="openSettings({{camera.camera.id}})" <i class="icon ion-settings"></i> </a>
