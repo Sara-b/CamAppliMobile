@@ -17,6 +17,7 @@ angular.module('starter', [
   'starter.controllers.CameraBisCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
+  'starter.controllers.CameraAdminCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
