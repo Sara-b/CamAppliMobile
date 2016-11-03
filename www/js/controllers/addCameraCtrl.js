@@ -1,5 +1,5 @@
 angular.module('starter.controllers.AddCameraCtrl', [])
-  .controller('AddCameraCtrl', function ($scope, addCameraService) {
+  .controller('AddCameraCtrl', function ($scope, cameraService) {
     $scope.camera = {
       name: '',
       uid: ''
@@ -7,7 +7,7 @@ angular.module('starter.controllers.AddCameraCtrl', [])
 
     $scope.addCamera = function (response) {
       console.log($scope.camera);
-      addCameraService.addCamera($scope.camera)
+      cameraService.addCamera($scope.camera)
         .then(function (response) {
           console.log(response);
         });
