@@ -4,17 +4,15 @@
           <button id="page-button3" style="float:left;" class="button button-light  icon ion-android-menu"></button>
           <h2 id="page-heading1" style="color:#000000; display:inline" class="title">Caméras</h2>
       </div> -->
+      <button ng-click="addCamera()" id="page-button2" style="font-weight:300;color:#FFFFFF;font-size:18px;border-radius:5px 5px 5px 5px; margin-bottom:10px" class="button button-positive button-small">Ajouter une caméra</button>
 
-      <button ng-click="" id="page-button2" style="font-weight:300;color:#FFFFFF;font-size:18px;border-radius:5px 5px 5px 5px; margin-bottom:10px" class="button button-balanced button-small">Ajouter une caméra</button>
-
-      <ion-list ng-repeat="camera in cameras" id="page-list1 cam-tab">
-          
-              <ion-item class="item-icon-right" id="page-list-item4">
-                  <a href="#/tab/camera/{{camera.camera.id}}">
-                      {{camera.camera.name}}
-                  </a>
-                  <a ng-click="openSettings({{camera.camera.id}})" <i class="icon ion-settings"></i> </a>
-              </ion-item>
+      <ion-list ng-repeat="camera in cameras" id="page-list1 cam-tab" ng-switch on="camera.isOwner">
+        <ion-item class="item-icon-right" id="page-list-item4">
+            <a href="#/tab/camera/{{camera.camera.id}}">
+                {{camera.camera.name}}
+            </a>
+            <a ng-click="openSettings({{camera.camera.id}})" ng-switch-when="true"> <i class="icon ion-settings"></i> </a>
+        </ion-item>
       </ion-list>
   </ion-content>
 </ion-view>

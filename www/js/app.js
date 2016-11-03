@@ -13,10 +13,11 @@ angular.module('starter', [
   'starter.controllers.RegisterCtrl',
   'starter.controllers.DashboardCtrl',
   'starter.controllers.AddCameraCtrl',
+  'starter.controllers.CameraSettingsCtrl',
   'starter.controllers.CameraCtrl',
-  'starter.controllers.CameraBisCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
+  'starter.controllers.CameraAdminCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
@@ -108,14 +109,14 @@ angular.module('starter', [
   })
   .state('tab.addCamera', {
     url: '/addCamera',
-  views: {
+    views: {
         'content': {
-          templateUrl: 'templates/tab-dashboard.html',
+          templateUrl: 'templates/tab-addCamera.html',
           controller: 'AddCameraCtrl'
         }
       }
     })
-    .state('tab.profil', {
+  .state('tab.profil', {
     url: '/profil',
     views: {
       'content': {
@@ -129,18 +130,18 @@ angular.module('starter', [
     views: {
       'content': {
         templateUrl: 'templates/tab-camera.html',
-        controller: 'CameraBisCtrl'
-      }
-    }
-  })
-  .state('tab.camerasettings', {
-    url: '/camera/:id/settings',
-    views: {
-      'content': {
-        templateUrl: 'templates/tab-camera-settings.html',
         controller: 'CameraCtrl'
       }
     }
+  })
+  .state('tab.camera-settings', {
+      url: '/camera/:camid/settings',
+      views: {
+          'content': {
+              templateUrl: 'templates/tab-camera-settings.html',
+              controller: 'CameraSettingsCtrl'
+          }
+      }
   });
 
   // if none of the above states are matched, use this as the fallback
