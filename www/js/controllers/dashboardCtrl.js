@@ -1,31 +1,30 @@
 angular.module('starter.controllers.DashboardCtrl', [])
-  .controller('DashboardCtrl', function ($http, $state, $scope, userFactory, CameraService, $stateParams) {
-    $scope.user = JSON.parse(userFactory.data);
-    console.log($scope.user);
-    console.log(userFactory.data);
-    $scope.userid = $scope.user.user.id;
+  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, cameraService, userService, storageService) {
 
-    $stateParams.id = $scope.userid;
+    $scope.dataStored = storageService.getStorage('data');
 
-    $scope.data = $http.get('http://127.0.0.1:1337/usercamerarole/'+ $stateParams.id +'/cameras', {
-      method: 'GET',
-      headers: {
-        "Content-Type": 'application/x-www-form-urlencoded',
-        "Authorization": 'JWT ' + userFactory.token
-      }
-    })
-    .then(function(response){
-      $scope.cameras = response.data;
-      console.log($scope.cameras);
-      return $scope.cameras;
-    });
-
-
-    $scope.openSettings = function (cameraid) {
-        //console.log('ok');
-        $state.transitionTo('tab.camera-settings');
-        //  }, function (err) {
-        //      console.log(err);
-        //  });
+    if($scope.dataStored == ""){
+      $state.reload();
     }
+    else{
+      $scope.user = JSON.parse($scope.dataStored);
+      var userid = $scope.user.user.id;
+
+      var data = cameraService.getAll(userid);
+      data.then(function(response){
+
+          $scope.cameras = response.data;
+          console.log($scope.cameras);
+          return $scope.cameras;
+        });
+
+      $scope.openSettings = function (cameraid) {
+          //console.log('ok');
+          $state.transitionTo('tab.camera-settings');
+          //  }, function (err) {
+          //      console.log(err);
+          //  });
+      }
+    }
+
 });
