@@ -1,4 +1,4 @@
-<ion-side-menus>
+<ion-side-menus enable-menu-with-back-views="true">
   <!-- Left menu -->
   <ion-side-menu side="left">
     <ion-header-bar class="bar-positive">
@@ -6,10 +6,10 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item href="">Mes Caméras</ion-item>
-        <ion-item href="">Utilisateurs</ion-item>
-        <ion-item href="">Mon Profil</ion-item>
+        <ion-item href="#/tab/dashboard">Mes Caméras</ion-item>
+        <ion-item href="#/tab/profil">Mon Profil</ion-item>
         <ion-item href="#/tab/about">A Propos</ion-item>
+        <ion-item href="#/tab/logout">Déconnexion</ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
@@ -21,7 +21,7 @@
       </ion-nav-buttons>
     </ion-nav-bar>
 
-    <ion-nav-view name="content" hide-back-button="true"></ion-nav-view>
+    <ion-nav-view name="content"></ion-nav-view>
 
   </ion-side-menu-content>
 </ion-side-menus>

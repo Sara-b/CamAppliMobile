@@ -17,12 +17,9 @@ angular.module('starter', [
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
 
-  'starter.services.loginService',
-  'starter.services.registerService',
-  'starter.services.addCameraService',
+  'starter.services.userService',
   'starter.services.cameraService',
-
-  'starter.services.userFactory'
+  'starter.services.storageService'
   ])
 
 .run(function($ionicPlatform) {
@@ -90,12 +87,21 @@ angular.module('starter', [
       }
     }
   })
+  .state('tab.logout', {
+    url: '/logout',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-logout.html',
+        controller: 'LogoutCtrl'
+      }
+    }
+  })
   .state('tab.dashboard', {
-    url: '/dashboard/:id',
+    url: '/dashboard',
     views: {
       'content': {
         templateUrl: 'templates/tab-dashboard.html',
-        controller: 'DashboardCtrl'
+        controller: 'DashboardCtrl',
       }
     }
   })
@@ -112,8 +118,17 @@ angular.module('starter', [
     url: '/camera/:id/settings',
     views: {
       'content': {
-          templateUrl: 'templates/tab-camera-settings.html',
-          controller: 'CameraCtrl'
+        templateUrl: 'templates/tab-camera-settings.html',
+        controller: 'CameraCtrl'
+      }
+    }
+  })
+  .state('tab.profil', {
+    url: '/profil',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-profil.html',
+        controller: 'ProfilCtrl'
       }
     }
   });

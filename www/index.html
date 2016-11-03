@@ -53,20 +53,17 @@ io.socket.get('/user', function gotResponse(body, response) {
     <script src="js/controllers/profilCtrl.js"></script>
     <script src="js/controllers/logoutCtrl.js"></script>
 
-    <script src="js/services/registerService.js"></script>
-    <script src="js/services/loginService.js"></script>
+    <script src="js/services/userService.js"></script>
     <script src="js/services/cameraService.js"></script>
-    <script src="js/services/addCameraService.js"></script>
-
-    <script src="js/services/userFactory.js"></script>
+    <script src="js/services/storageService.js"></script>
   </head>
   <body ng-app="starter">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
     <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+      <!-- <ion-nav-back-button>
+      </ion-nav-back-button> -->
     </ion-nav-bar>
     <!--
       The views will be rendered in the <ion-nav-view> directive below

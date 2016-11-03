@@ -1,31 +1,22 @@
 angular.module('starter.controllers.DashboardCtrl', [])
-  .controller('DashboardCtrl', function ($http, $state, $scope, userFactory, CameraService, $stateParams) {
-    var debbug = eval(userFactory);
-    console.log(debbug);
-    $scope.user = JSON.parse(userFactory.data);
-    if($scope.user == ""){
+  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, cameraService, userService, storageService) {
+
+    $scope.dataStored = storageService.getStorage('data');
+
+    if($scope.dataStored == ""){
       $state.reload();
     }
     else{
-      console.log($scope.user);
-      console.log(userFactory.data);
-      $scope.userid = $scope.user.user.id;
+      $scope.user = JSON.parse($scope.dataStored);
+      var userid = $scope.user.user.id;
 
-      $stateParams.id = $scope.userid;
+      var data = cameraService.get(userid);
+      data.then(function(response){
 
-      $scope.data = $http.get('http://127.0.0.1:1337/usercamerarole/'+ $stateParams.id +'/cameras', {
-        method: 'GET',
-        headers: {
-          "Content-Type": 'application/x-www-form-urlencoded',
-          "Authorization": 'JWT ' + userFactory.token
-        }
-      })
-      .then(function(response){
-        $scope.cameras = response.data;
-        console.log($scope.cameras);
-        return $scope.cameras;
-      });
-
+          $scope.cameras = response.data;
+          console.log($scope.cameras);
+          return $scope.cameras;
+        });
 
       $scope.openSettings = function (cameraid) {
           //console.log('ok');
