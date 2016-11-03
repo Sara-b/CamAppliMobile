@@ -1,36 +1,48 @@
 angular.module('starter.controllers.CameraCtrl', [])
-  .controller('CameraCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService){
-      console.log('ok');
+  .controller('CameraCtrl', function($state, $scope, $stateParams, cameraService){
+      
+    camera = cameraService.get($stateParams.id);
+
+    $scope.data = "";
+
+    camera.then(function(result){
+        console.log(result);
+        $scope.data = result.data;
+        console.log($scope.data);
+        $scope.camera = {
+            id: $scope.data.id,
+            name: $scope.data.name,
+            switchOn: true,
+            owner: $scope.data.owner
+        };
+        console.log($scope.camera);
+    });
     
 
-      $scope.data = $http.get('http://127.0.0.1:1337/camera/' + $stateParams.camid, {
-          method: 'GET',
-          headers: {
-              "Content-Type": 'application/x-www-form-urlencoded',
-              "Authorization": 'JWT ' + storageService.getStorage('token')
-          }
-      })
-      .then(function(response){
-          $scope.camera = response.data;
-          return $scope.camera;
-      });
+    // var imageUrl= document.camimage.src;
+    //       var random = new Date().getTime();
+    //       var delay = 1;										
+    //       var counter = 0;
+    //       var buffer = new Image; 
+    //       function DisplayImage() { 
+    //         document.camimage.src = buffer.src; 
+    //         LoadNextImage(); 
+    //       } 
 
-
-
-      $scope.updateName = function (response) {
-          cameraService.updateCam($scope.camera)
-              .then(function (response) {
-                  if (response.status == 200) {
-                      console.log($scope.user);
-                      $state.go('tab.camera-settings', { camid: $scope.camera.id });
-                  } else {
-                      $scope.message = 'Une erreur est survenue';
-                      return $scope.message;
-                  }
-              },
-              function(err){
-                  return err;
-              })
-          }
+    //       function LoadBuffer() { 
+    //         var trickname = imageUrl; 
+    //         ++counter; 
+    //         trickname += "?counter=" + (random + counter); 
+    //         buffer.src = trickname; 
+    //         buffer.onload = DisplayImage; 
+    //         alert("hey");
+    //       } 
+    //       function LoadNextImage() { 
+    //         $timeout(LoadBuffer(), 300*delay); 
+    //       } 
+    
+    // LoadNextImage(); 
+    
+    return $scope.camera;
 
   });
