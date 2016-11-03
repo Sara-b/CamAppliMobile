@@ -14,6 +14,7 @@ angular.module('starter', [
   'starter.controllers.DashboardCtrl',
   'starter.controllers.AddCameraCtrl',
   'starter.controllers.CameraCtrl',
+  'starter.controllers.CameraBisCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
 
@@ -105,7 +106,7 @@ angular.module('starter', [
   views: {
         'content': {
           templateUrl: 'templates/tab-dashboard.html',
-          controller: 'DashboardCtrl'
+          controller: 'AddCameraCtrl'
         }
       }
     })
@@ -123,7 +124,7 @@ angular.module('starter', [
     views: {
       'content': {
         templateUrl: 'templates/tab-camera.html',
-        controller: 'AddCameraCtrl'
+        controller: 'CameraBisCtrl'
       }
     }
   })

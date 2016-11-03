@@ -1,5 +1,5 @@
 angular.module('starter.controllers.DashboardCtrl', [])
-  .controller('DashboardCtrl', function ($http, $state, $scope, userFactory, CameraService, $stateParams) {
+  .controller('DashboardCtrl', function ($http, $state, $scope, userFactory, cameraService, $stateParams) {
     $scope.user = JSON.parse(userFactory.data);
     console.log($scope.user);
     console.log(userFactory.data);
