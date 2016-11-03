@@ -10,7 +10,7 @@ angular.module('starter.controllers.DashboardCtrl', [])
       $scope.user = JSON.parse($scope.dataStored);
       var userid = $scope.user.user.id;
 
-      var data = cameraService.get(userid);
+      var data = cameraService.getAll(userid);
       data.then(function(response){
 
           $scope.cameras = response.data;
@@ -18,12 +18,8 @@ angular.module('starter.controllers.DashboardCtrl', [])
           return $scope.cameras;
         });
 
-      $scope.openSettings = function (cameraid) {
-          //console.log('ok');
-          $state.transitionTo('tab.camera-settings');
-          //  }, function (err) {
-          //      console.log(err);
-          //  });
+      $scope.addCamera = function(){
+        $state.go('tab.addCamera');
       }
     }
 

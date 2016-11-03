@@ -30,7 +30,7 @@ angular.module('starter.controllers.ProfilCtrl', [])
         $scope.user.password = "";
         console.log($scope.user);
         console.log(response.data);
-        data = JSON.stringify(response.data[0]);
+        data = '{"token":"' + storageService.getStorage('token') + '","user":' + JSON.stringify(response.data[0]) + '}';
         console.log(data);
         storageService.updateStorage('data', data);
         console.log(storageService.getStorage('data'));

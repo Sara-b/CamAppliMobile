@@ -1,0 +1,25 @@
+<ion-view view-title="Profil">
+  <ion-content class="padding">
+      <!--<p>Email : {{user.user.email}}</p><input>
+      <p>Prénom : {{user.user.firstname}}</p>
+      <p>Nom : {{user.user.lastname}}</p>-->
+      
+    <form ng-submit="update()" >
+        <label for="" class="item item-input">
+            <input ng-model="user.email" type="text" value={{data.user.email}} disabled class="item item-input"/>
+        </label>
+        <label for="" class="item item-input">
+            <input ng-model="user.firstname" type="text" value={{data.user.firstname}} placeholder="Prénom" class="item item-input"/>
+        </label>
+        <label for="" class="item item-input">
+            <input ng-model="user.lastname" type="text" value={{data.user.lastname}} placeholder="Nom de famille" class="item item-input"/>
+        </label>
+        <label for="" class="item item-input">
+            <input ng-model="user.password" type="password" placeholder="Password" class="item item-input"/> 
+        </label>
+        <button class="button button-block button-positive">
+          Enregistrer
+        </button>
+      </form>
+  </ion-content>
+</ion-view>
