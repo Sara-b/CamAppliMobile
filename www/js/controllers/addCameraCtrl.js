@@ -1,12 +1,10 @@
 angular.module('starter.controllers.AddCameraCtrl', [])
-  .controller('AddCameraCtrl', function ($scope, cameraService) {
-    $scope.camera = {
-      name: '',
-      uid: ''
-    }
+  .controller('AddCameraCtrl', function ($scope, cameraService, storageService) {
+    userData = JSON.parse(storageService.getStorage('data'));
+    userid = userData.user.id;
+    $scope.camera = { name: '', uid: '', userid: userid };
 
     $scope.addCamera = function (response) {
-      console.log($scope.camera);
       cameraService.addCamera($scope.camera)
         .then(function (response) {
           console.log(response);

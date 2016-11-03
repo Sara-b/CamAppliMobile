@@ -108,31 +108,13 @@ angular.module('starter', [
   })
   .state('tab.addCamera', {
     url: '/addCamera',
-  views: {
+    views: {
         'content': {
-          templateUrl: 'templates/tab-dashboard.html',
+          templateUrl: 'templates/tab-addCamera.html',
           controller: 'AddCameraCtrl'
         }
       }
     })
-    .state('tab.profil', {
-    url: '/profil',
-    views: {
-      'content': {
-        templateUrl: 'templates/tab-profil.html',
-        controller: 'ProfilCtrl'
-      }
-    }
-  })
-  .state('tab.camera', {
-    url: '/camera/:id',
-    views: {
-      'content': {
-        templateUrl: 'templates/tab-camera.html',
-        controller: 'CameraBisCtrl'
-      }
-    }
-  })
   .state('tab.profil', {
     url: '/profil',
     views: {
@@ -146,7 +128,7 @@ angular.module('starter', [
     url: '/camera/:id',
     views: {
       'content': {
-        templateUrl: 'templates/tab-addCamera.html',
+        templateUrl: 'templates/tab-camera.html',
         controller: 'AddCameraCtrl'
       }
     }
