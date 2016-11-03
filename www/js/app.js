@@ -127,14 +127,14 @@ angular.module('starter', [
       }
     }
   })
-  .state('tab.camerasettings', {
-    url: '/camera/:id/settings',
-    views: {
-      'content': {
-          templateUrl: 'templates/tab-camera-settings.html',
-          controller: 'CameraCtrl'
+  .state('tab.camera-settings', {
+      url: '/camera/:camid/settings',
+      views: {
+          'content': {
+              templateUrl: 'templates/tab-camera-settings.html',
+              controller: 'CameraCtrl'
+          }
       }
-    }
   });
 
   // if none of the above states are matched, use this as the fallback

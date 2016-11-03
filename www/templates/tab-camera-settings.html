@@ -1,28 +1,30 @@
-﻿<ion-view view-title="CameraSettings">
+﻿<ion-view view-title="Propriétés">
     <ion-content class="padding">
-        <div style="height:50px; margin-bottom:20px">
-            <button id="page-button3" style="float:left;" class="button button-light  icon ion-android-menu"></button>
-            <h2 id="page-heading1" style="color:#000000; display:inline" class="title">Propriétés</h2>
-        </div>
-
-        <form action="" ng-submit="">
+        <form action="" ng-submit="updateName()">
             <label class="item item-input" id="page-input1">
-                <span class="input-label">Nouveau nom</span>
-                <input type="text" placeholder="Camera name">
+                <span class="input-label">Editer le nom :</span>
+                <input ng-model="camera.name" type="text">
             </label>
             <button type="submit" class="button button-block button-positive">
                 Valider
             </button>
         </form>
 
+        <div class="item item-body" id="page-list-item-container1">
+            <div id="page-markdown3">
+                <p style="margin-top:0px;color:#000000;">Nom : {{camera.name}}</p>
+                <p style="color:#000000;">Etat : {{camera.switchOn}}</p>
+                <p style="color:#000000;">Socket : {{camera.socket}}</p>
+                <p style="color:#000000;">Propriétaire : {{camera.owner.firstname}} {{camera.owner.lastname}}</p>
+            </div>
+        </div>
 
-        <ul>
-        <!-- <li>{{camera}}</li> -->
-        <li>Nom : {{camera.camera.name}}</li>
-          <li>Etat : {{camera.camera.switchOn}}</li>
-          <li>Socket : {{camera.camera.socket}}</li>
-          <li>Propriétaire : {{camera.user.firstname}} {{camera.user.lastname}} </li>
-        </ul>
-
+        <!--<ion-list id="page-list1">
+            <ion-item id="page-list-item4">Nom : {{camera.name}}</ion-item>
+            <ion-item id="page-list-item5">Etat : {{camera.switchOn}}</ion-item>
+            <ion-item id="page-list-item6">Socket : {{camera.socket}}</ion-item>
+            <ion-item id="page-list-item6">Propriétaire : {{camera.owner.firstname}} {{camera.owner.lastname}}</ion-item>
+        </ion-list>-->
+        
     </ion-content>
 </ion-view>
