@@ -3,21 +3,21 @@ angular.module('starter.controllers.DashboardCtrl', [])
 
     $scope.dataStored = storageService.getStorage('data');
 
-    if($scope.dataStored == ""){
-      $state.reload();
+    if ($scope.dataStored == "") {
+        $state.reload();
     }
-    else{
-      $scope.user = JSON.parse($scope.dataStored);
-      var userid = $scope.user.user.id;
+    else {
+        $scope.user = JSON.parse($scope.dataStored);
+        var userid = $scope.user.user.id;
 
-      var data = cameraService.getAll(userid);
-      data.then(function(response){
+        var data = cameraService.getAll(userid);
+        data.then(function (response) {
 
-          $scope.cameras = response.data;
-          console.log($scope.cameras);
-          return $scope.cameras;
+            $scope.cameras = response.data;
+            console.log($scope.cameras);
+            return $scope.cameras;
         });
-
+    }
 
     $scope.openSettings = function (cameraid) {
         $state.go('tab.camera-settings', { camid: cameraid });

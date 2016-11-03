@@ -1,5 +1,5 @@
 angular.module('starter.controllers.CameraCtrl', [])
-  .controller('CameraCtrl', function($http, $scope, CameraService, $stateParams, userFactory){
+  .controller('CameraCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService){
       console.log('ok');
     
 
@@ -7,7 +7,7 @@ angular.module('starter.controllers.CameraCtrl', [])
           method: 'GET',
           headers: {
               "Content-Type": 'application/x-www-form-urlencoded',
-              "Authorization": 'JWT ' + userFactory.token
+              "Authorization": 'JWT ' + storageService.getStorage('token')
           }
       })
       .then(function(response){
@@ -18,12 +18,11 @@ angular.module('starter.controllers.CameraCtrl', [])
 
 
       $scope.updateName = function (response) {
-          console.log(JSON.stringify($scope.camera));
-          CameraService.updateCam($scope.camera)
+          cameraService.updateCam($scope.camera)
               .then(function (response) {
                   if (response.status == 200) {
                       console.log($scope.user);
-                      $state.go('tab.camera-settings', { camid: data.id });
+                      $state.go('tab.camera-settings', { camid: $scope.camera.id });
                   } else {
                       $scope.message = 'Une erreur est survenue';
                       return $scope.message;

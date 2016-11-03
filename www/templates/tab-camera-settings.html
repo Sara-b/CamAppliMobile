@@ -1,11 +1,11 @@
 ﻿<ion-view view-title="Propriétés">
     <ion-content class="padding">
-        <form action="" ng-submit="updateName()">
+        <form>
             <label class="item item-input" id="page-input1">
                 <span class="input-label">Editer le nom :</span>
                 <input ng-model="camera.name" type="text">
             </label>
-            <button type="submit" class="button button-block button-balanced">
+            <button ng-click="updateName()" type="submit" class="button button-block button-balanced">
                 Valider
             </button>
         </form>
