@@ -10,10 +10,29 @@ angular.module('starter.controllers.CameraCtrl', [])
         $scope.camera = {
             id: $scope.data.id,
             name: $scope.data.name,
-            switchOn: true,
+            switchOn: $scope.data.switchOn,
             owner: $scope.data.owner
         };
     });
+
+    if (!io.socket.alreadyListeningToCamera) {
+      io.socket.alreadyListeningToCamera = true;
+      io.socket.on('camera', function onServerSentEvent (msg) {
+        
+        console.log("event");
+        console.log(msg);
+        // Let's see what the server has to say...
+        switch(msg.verb) {
+
+          case 'updated':
+            $scope.camera.push(msg.data); // (add the new order to the DOM)
+            $scope.$apply();              // (re-render)
+            break;
+
+          default: return; // ignore any unrecognized messages
+        }
+      });
+    }
     
 
     // var imageUrl= document.camimage.src;
