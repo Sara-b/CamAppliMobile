@@ -17,12 +17,14 @@ angular.module('starter', [
   'starter.controllers.CameraCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
+  'starter.controllers.UserRolesCtrl',
   'starter.controllers.HistoriqueCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
   'starter.services.storageService',
-  'starter.services.logService'
+  'starter.services.logService',
+  'starter.services.roleService'
   ])
 
 .run(function($ionicPlatform) {
@@ -41,7 +43,9 @@ angular.module('starter', [
   });
 
 })
-
+.config(['$sailsProvider', function ($sailsProvider) {
+    $sailsProvider.url = 'http://localhost:1337';
+}])
 .config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -152,9 +156,28 @@ angular.module('starter', [
         controller: 'HistoriqueCtrl'
       }
     }
+  })
+  .state('tab.userRole', {
+    url: '/camera/:ucrid/role',
+      views: {
+        'content': {
+            templateUrl: 'templates/tab-userRole.html',
+            controller: 'UserRolesCtrl'
+          }
+        }
     });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/login');
 
-});
+})
+
+  .factory('Interceptor', function($window){
+    var token = window.sessionStorage.getItem('token');
+    return {
+      response: function(config){
+        config.headers['Authorization'] = 'JWT ' + token;
+        return config;
+      }
+    }
+  });

@@ -1,0 +1,16 @@
+﻿<ion-view>
+    <ion-nav-title>
+        {{ucr.user.firstname}} {{ucr.user.lastname}} ( {{ucr.role.name}} )
+    </ion-nav-title>
+    <ion-content class="padding">
+
+        <ion-list ng-repeat="role in roles" id="page-list1 cam-tab">
+            <ion-item class="item-icon-right" id="page-list-item4">
+                <a ng-click="updateRole(role.id)">
+                    {{role.name}}
+                </a>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

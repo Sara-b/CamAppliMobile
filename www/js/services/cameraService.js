@@ -1,5 +1,5 @@
-angular.module('starter.services.cameraService', [])
-  .service('cameraService', function($http, storageService){
+angular.module('starter.services.cameraService', ['ngSails'])
+  .service('cameraService', function($http, storageService,$sails){
 
       this.get = function (cameraId) {
         return $http({
@@ -18,25 +18,23 @@ angular.module('starter.services.cameraService', [])
         });
       };
     
+    //TODO remettre le header
     this.getAll = function(params){
-      return $http({
-        method: 'GET',
-        url: 'http://127.0.0.1:1337/usercamerarole/'+ params +'/cameras',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'JWT ' + storageService.getStorage('token')
-        },
-        dataType: 'json',
-        crossDomain: 'true'
-      },
-      function(err){
+      return $sails.get('http://127.0.0.1:1337/usercamerarole/'+ params +'/cameras')
+     }, function(err){
         console.log(err);
-        return err;
-      })
-      .then(function(response){
-        return response;
-      });
-    };
+        console.log('Houston, we got a problem!');
+      };
+    
+        // headers: {
+        //   'Content-Type': 'application/x-www-form-urlencoded',
+        //   'Authorization': 'JWT ' + storageService.getStorage('token')
+        // },
+       // dataType: 'json',
+       // crossDomain: 'true'
+    
+     
+   
 
   	// Ajout de camera : addCameraCtrl
     this.addCamera = function (camera) {
@@ -65,7 +63,7 @@ angular.module('starter.services.cameraService', [])
         return response;
       });
     };
-
+    
     
     this.updateCam = function (data) {
         return $http({
