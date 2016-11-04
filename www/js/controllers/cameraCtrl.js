@@ -6,16 +6,13 @@ angular.module('starter.controllers.CameraCtrl', [])
     $scope.data = "";
 
     camera.then(function(result){
-        console.log(result);
         $scope.data = result.data;
-        console.log($scope.data);
         $scope.camera = {
             id: $scope.data.id,
             name: $scope.data.name,
             switchOn: true,
             owner: $scope.data.owner
         };
-        console.log($scope.camera);
     });
     
 
