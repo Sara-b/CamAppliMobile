@@ -1,9 +1,5 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-<!--       <div style="height:50px; margin-bottom:20px">
-          <button id="page-button3" style="float:left;" class="button button-light  icon ion-android-menu"></button>
-          <h2 id="page-heading1" style="color:#000000; display:inline" class="title">Caméras</h2>
-      </div> -->
       <button ng-click="addCamera()" id="page-button2" style="font-weight:300;color:#FFFFFF;font-size:18px;border-radius:5px 5px 5px 5px; margin-bottom:10px" class="button button-positive button-small">Ajouter une caméra</button>
 
       <ion-list ng-repeat="camera in cameras" id="page-list1 cam-tab" ng-switch on="camera.isOwner">

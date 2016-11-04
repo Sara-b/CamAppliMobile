@@ -1,5 +1,5 @@
-angular.module('starter.controllers.CameraCtrl', [])
-  .controller('CameraCtrl', function($state, $scope, $stateParams, cameraService){
+angular.module('starter.controllers.CameraCtrl', ['ngSails'])
+  .controller('CameraCtrl', function($state, $scope, $stateParams, cameraService,$sails){
       
     camera = cameraService.get($stateParams.id);
 
@@ -13,52 +13,27 @@ angular.module('starter.controllers.CameraCtrl', [])
             switchOn: $scope.data.switchOn,
             owner: $scope.data.owner
         };
-        console.log($scope.camera);
     });
-
-    if (!io.socket.alreadyListeningToCamera) {
-      io.socket.alreadyListeningToCamera = true;
-      io.socket.on('camera', function onServerSentEvent (msg) {
-        
-        console.log("event");
-        console.log(msg);
-        // Let's see what the server has to say...
-        switch(msg.verb) {
-
-          case 'updated':
-            $scope.camera.push(msg.data); // (add the new order to the DOM)
-            $scope.$apply();              // (re-render)
-            break;
-
-          default: return; // ignore any unrecognized messages
-        }
+    $sails.get('http://127.0.0.1:1337/camera/3')
+      .success(function (data, status, headers, jwr) {
+       console.log (data);
+       console.log (jwr);
+       console.log (status);
+       
+       
+      })
+      .error(function (data, status, headers, jwr) {
+        alert('Houston, we got a problem!');
       });
-    }
-    
-
-    // var imageUrl= document.camimage.src;
-    //       var random = new Date().getTime();
-    //       var delay = 1;										
-    //       var counter = 0;
-    //       var buffer = new Image; 
-    //       function DisplayImage() { 
-    //         document.camimage.src = buffer.src; 
-    //         LoadNextImage(); 
-    //       } 
-
-    //       function LoadBuffer() { 
-    //         var trickname = imageUrl; 
-    //         ++counter; 
-    //         trickname += "?counter=" + (random + counter); 
-    //         buffer.src = trickname; 
-    //         buffer.onload = DisplayImage; 
-    //         alert("hey");
-    //       } 
-    //       function LoadNextImage() { 
-    //         $timeout(LoadBuffer(), 300*delay); 
-    //       } 
-    
-    // LoadNextImage(); 
+     $sails.on("camera", function (message) {
+       switch(message.verb){
+          case "updated" : 
+         $scope.camera =  message.data[0]
+          break;
+       }
+      console.log('youpi')
+      console.log(message)
+    });
     
     return $scope.camera;
 
