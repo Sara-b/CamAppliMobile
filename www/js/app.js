@@ -17,11 +17,8 @@ angular.module('starter', [
   'starter.controllers.CameraCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
-<<<<<<< HEAD
   'starter.controllers.UserRolesCtrl',
-=======
   'starter.controllers.HistoriqueCtrl',
->>>>>>> Log
 
   'starter.services.userService',
   'starter.services.cameraService',
@@ -184,9 +181,3 @@ angular.module('starter', [
       }
     }
   });
-
-
-
-=======
-});
->>>>>>> Log
