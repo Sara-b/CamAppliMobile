@@ -6,7 +6,8 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
     $scope.data = "";
 
     camera.then(function(result){
-        $scope.data = result.data;
+      console.log(result);
+        $scope.data = result;
         $scope.camera = {
             id: $scope.data.id,
             name: $scope.data.name,
@@ -14,17 +15,7 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
             owner: $scope.data.owner
         };
     });
-    $sails.get('http://127.0.0.1:1337/camera/3')
-      .success(function (data, status, headers, jwr) {
-       console.log (data);
-       console.log (jwr);
-       console.log (status);
-       
-       
-      })
-      .error(function (data, status, headers, jwr) {
-        alert('Houston, we got a problem!');
-      });
+    
      $sails.on("camera", function (message) {
        switch(message.verb){
           case "updated" : 
@@ -34,6 +25,12 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
       console.log('youpi')
       console.log(message)
     });
+
+
+    $scope.switch = function(){
+      console.log("switch");
+      cameraService.update($scope.camera);
+    }
     
     return $scope.camera;
 

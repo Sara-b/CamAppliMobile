@@ -13,7 +13,7 @@ angular.module('starter.controllers.DashboardCtrl', [])
         var data = cameraService.getAll(userid);
         data.then(function (response) {
 
-        $scope.cameras = response.data;
+        $scope.cameras = response;
 
 
         
