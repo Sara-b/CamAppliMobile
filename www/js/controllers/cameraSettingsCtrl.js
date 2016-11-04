@@ -1,11 +1,11 @@
 angular.module('starter.controllers.CameraSettingsCtrl', [])
   .controller('CameraSettingsCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService, roleService){
       console.log('ok');
-    
 
       cameraService.get($stateParams.camid)
       .then(function(response){
           $scope.camera = response.data;
+          console.log($scope.camera);
           return $scope.camera;
       });
 

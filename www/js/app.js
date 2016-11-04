@@ -17,7 +17,11 @@ angular.module('starter', [
   'starter.controllers.CameraCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
+<<<<<<< HEAD
   'starter.controllers.UserRolesCtrl',
+=======
+  'starter.controllers.HistoriqueCtrl',
+>>>>>>> Log
 
   'starter.services.userService',
   'starter.services.cameraService',
@@ -75,7 +79,7 @@ angular.module('starter', [
         controller: 'RegisterCtrl'
       }
     }
-  })
+    })
   .state('mLog.login', {
     url: '/login',
     views: {
@@ -84,7 +88,7 @@ angular.module('starter', [
         controller: 'LoginCtrl'
       }
     }
-  })
+    })
   .state('tab.about', {
     url: '/about',
     views: {
@@ -92,7 +96,7 @@ angular.module('starter', [
         templateUrl: 'templates/about.html'
       }
     }
-  })
+    })
   .state('tab.logout', {
     url: '/logout',
     views: {
@@ -101,7 +105,7 @@ angular.module('starter', [
         controller: 'LogoutCtrl'
       }
     }
-  })
+    })
   .state('tab.dashboard', {
     url: '/dashboard',
     views: {
@@ -110,7 +114,7 @@ angular.module('starter', [
         controller: 'DashboardCtrl',
       }
     }
-  })
+    })
   .state('tab.addCamera', {
     url: '/addCamera',
     views: {
@@ -128,7 +132,7 @@ angular.module('starter', [
         controller: 'ProfilCtrl'
       }
     }
-  })
+    })
   .state('tab.camera', {
     url: '/camera/:id',
     views: {
@@ -137,23 +141,32 @@ angular.module('starter', [
         controller: 'CameraCtrl'
       }
     }
-  })
+    })
   .state('tab.camera-settings', {
-      url: '/camera/:camid/settings',
-      views: {
-          'content': {
-              templateUrl: 'templates/tab-camera-settings.html',
-              controller: 'CameraSettingsCtrl'
-          }
+    url: '/camera/:camid/settings',
+    views: {
+        'content': {
+            templateUrl: 'templates/tab-camera-settings.html',
+            controller: 'CameraSettingsCtrl'
+        }
+    }
+    })
+  .state('tab.historique',{
+    url: '/camera/:camid/historique',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-historique.html',
+        controller: 'HistoriqueCtrl'
       }
+    }
   })
-    .state('tab.userRole', {
-        url: '/camera/:ucrid/role',
-        views: {
-            'content': {
-                templateUrl: 'templates/tab-userRole.html',
-                controller: 'UserRolesCtrl'
-            }
+  .state('tab.userRole', {
+    url: '/camera/:ucrid/role',
+      views: {
+        'content': {
+            templateUrl: 'templates/tab-userRole.html',
+            controller: 'UserRolesCtrl'
+          }
         }
     });
 
@@ -174,3 +187,6 @@ angular.module('starter', [
 
 
 
+=======
+});
+>>>>>>> Log
