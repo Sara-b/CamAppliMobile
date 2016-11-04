@@ -17,11 +17,11 @@ angular.module('starter', [
   'starter.controllers.CameraCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
-  'starter.controllers.CameraAdminCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
-  'starter.services.storageService'
+  'starter.services.storageService',
+  'starter.services.logService'
   ])
 
 .run(function($ionicPlatform) {
