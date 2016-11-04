@@ -1,6 +1,6 @@
 
-angular.module('starter.controllers.CamerasAdminCtrl', [])
-    .controller('CamerasAdminCtrl', function ($scope, $http, userFactory) {
+angular.module('starter.controllers.CameraAdminCtrl', [])
+    .controller('CameraAdminCtrl', function ($scope, $http, userFactory) {
 
         $scope.user = JSON.parse(userFactory.data);
         $stateParams = $scope.user.user.id;
