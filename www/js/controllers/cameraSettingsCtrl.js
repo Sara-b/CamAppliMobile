@@ -4,7 +4,7 @@ angular.module('starter.controllers.CameraSettingsCtrl', [])
 
       cameraService.get($stateParams.camid)
       .then(function(response){
-          $scope.camera = response.data;
+          $scope.camera = response;
           console.log($scope.camera);
           return $scope.camera;
       });
