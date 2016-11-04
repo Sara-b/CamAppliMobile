@@ -17,11 +17,13 @@ angular.module('starter', [
   'starter.controllers.CameraCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
-  'starter.controllers.CameraAdminCtrl',
+  'starter.controllers.UserRolesCtrl',
+  //'starter.controllers.CameraAdminCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
-  'starter.services.storageService'
+  'starter.services.storageService',
+  'starter.services.roleService'
   ])
 
 .run(function($ionicPlatform) {
@@ -142,7 +144,16 @@ angular.module('starter', [
               controller: 'CameraSettingsCtrl'
           }
       }
-  });
+  })
+    .state('tab.userRole', {
+        url: '/camera/:ucrid/role',
+        views: {
+            'content': {
+                templateUrl: 'templates/tab-userRole.html',
+                controller: 'UserRolesCtrl'
+            }
+        }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/login');
