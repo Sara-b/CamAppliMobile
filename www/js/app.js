@@ -17,6 +17,7 @@ angular.module('starter', [
   'starter.controllers.CameraCtrl',
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
+  'starter.controllers.HistoriqueCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
@@ -71,7 +72,7 @@ angular.module('starter', [
         controller: 'RegisterCtrl'
       }
     }
-  })
+    })
   .state('mLog.login', {
     url: '/login',
     views: {
@@ -80,7 +81,7 @@ angular.module('starter', [
         controller: 'LoginCtrl'
       }
     }
-  })
+    })
   .state('tab.about', {
     url: '/about',
     views: {
@@ -88,7 +89,7 @@ angular.module('starter', [
         templateUrl: 'templates/about.html'
       }
     }
-  })
+    })
   .state('tab.logout', {
     url: '/logout',
     views: {
@@ -97,7 +98,7 @@ angular.module('starter', [
         controller: 'LogoutCtrl'
       }
     }
-  })
+    })
   .state('tab.dashboard', {
     url: '/dashboard',
     views: {
@@ -106,7 +107,7 @@ angular.module('starter', [
         controller: 'DashboardCtrl',
       }
     }
-  })
+    })
   .state('tab.addCamera', {
     url: '/addCamera',
     views: {
@@ -124,7 +125,7 @@ angular.module('starter', [
         controller: 'ProfilCtrl'
       }
     }
-  })
+    })
   .state('tab.camera', {
     url: '/camera/:id',
     views: {
@@ -133,28 +134,27 @@ angular.module('starter', [
         controller: 'CameraCtrl'
       }
     }
-  })
+    })
   .state('tab.camera-settings', {
-      url: '/camera/:camid/settings',
-      views: {
-          'content': {
-              templateUrl: 'templates/tab-camera-settings.html',
-              controller: 'CameraSettingsCtrl'
-          }
+    url: '/camera/:camid/settings',
+    views: {
+        'content': {
+            templateUrl: 'templates/tab-camera-settings.html',
+            controller: 'CameraSettingsCtrl'
+        }
+    }
+    })
+  .state('tab.historique',{
+    url: '/camera/:camid/historique',
+    views: {
+      'content': {
+        templateUrl: 'templates/tab-historique.html',
+        controller: 'HistoriqueCtrl'
       }
-  });
+    }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/login');
 
-})
-
-  .factory('Interceptor', function($window){
-    var token = window.sessionStorage.getItem('token');
-    return {
-      response: function(config){
-        config.headers['Authorization'] = 'JWT ' + token;
-        return config;
-      }
-    }
-  });
+});

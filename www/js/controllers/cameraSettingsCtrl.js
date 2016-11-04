@@ -1,7 +1,6 @@
 angular.module('starter.controllers.CameraSettingsCtrl', [])
   .controller('CameraSettingsCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService){
       console.log('ok');
-    
 
       $scope.data = $http.get('http://127.0.0.1:1337/camera/' + $stateParams.camid, {
           method: 'GET',
@@ -12,6 +11,7 @@ angular.module('starter.controllers.CameraSettingsCtrl', [])
       })
       .then(function(response){
           $scope.camera = response.data;
+          console.log($scope.camera);
           return $scope.camera;
       });
 
