@@ -18,11 +18,11 @@ angular.module('starter', [
   'starter.controllers.ProfilCtrl',
   'starter.controllers.LogoutCtrl',
   'starter.controllers.UserRolesCtrl',
-  //'starter.controllers.CameraAdminCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
   'starter.services.storageService',
+  'starter.services.logService',
   'starter.services.roleService'
   ])
 
@@ -42,7 +42,9 @@ angular.module('starter', [
   });
 
 })
-
+.config(['$sailsProvider', function ($sailsProvider) {
+    $sailsProvider.url = 'http://localhost:1337';
+}])
 .config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -169,3 +171,6 @@ angular.module('starter', [
       }
     }
   });
+
+
+

@@ -13,9 +13,42 @@ angular.module('starter.controllers.DashboardCtrl', [])
         var data = cameraService.getAll(userid);
         data.then(function (response) {
 
-            $scope.cameras = response.data;
-            console.log($scope.cameras);
-            return $scope.cameras;
+        $scope.cameras = response.data;
+
+
+        
+          for(i = 0; i < $scope.cameras.length; i++){
+            
+            var isOwner;
+            var userId = $scope.cameras[i].user.id;
+            var cameraId = $scope.cameras[i].camera.owner;
+            var cameraSwitch = $scope.cameras[i].camera.switchOn;
+
+            // console.log($scope.cameras[i].camera);
+
+            // display admin settings button
+            if(userId == cameraId){
+              $scope.cameras[i].isOwner = true;
+            }else{
+              $scope.cameras[i].isOwner = false;
+            }
+
+            if(cameraSwitch == true){
+              $scope.cameras[i].color = "green";
+            }else{
+              $scope.cameras[i].color = "red";
+            }
+
+            // console.log(cameraSwitch + ' ' + $scope.class);
+
+            $scope.isOwner = $scope.cameras[i].isOwner;
+          }
+
+        // display on/off icon
+
+        // console.log($scope.cameras);
+
+          return $scope.cameras;
         });
 
       $scope.addCamera = function(){

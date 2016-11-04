@@ -1,47 +1,39 @@
-angular.module('starter.controllers.CameraCtrl', [])
-  .controller('CameraCtrl', function($state, $scope, $stateParams, cameraService){
+angular.module('starter.controllers.CameraCtrl', ['ngSails'])
+  .controller('CameraCtrl', function($state, $scope, $stateParams, cameraService,$sails){
       
     camera = cameraService.get($stateParams.id);
 
     $scope.data = "";
 
     camera.then(function(result){
-        console.log(result);
         $scope.data = result.data;
-        console.log($scope.data);
         $scope.camera = {
             id: $scope.data.id,
             name: $scope.data.name,
-            switchOn: true,
+            switchOn: $scope.data.switchOn,
             owner: $scope.data.owner
         };
-        console.log($scope.camera);
     });
-    
-
-    // var imageUrl= document.camimage.src;
-    //       var random = new Date().getTime();
-    //       var delay = 1;										
-    //       var counter = 0;
-    //       var buffer = new Image; 
-    //       function DisplayImage() { 
-    //         document.camimage.src = buffer.src; 
-    //         LoadNextImage(); 
-    //       } 
-
-    //       function LoadBuffer() { 
-    //         var trickname = imageUrl; 
-    //         ++counter; 
-    //         trickname += "?counter=" + (random + counter); 
-    //         buffer.src = trickname; 
-    //         buffer.onload = DisplayImage; 
-    //         alert("hey");
-    //       } 
-    //       function LoadNextImage() { 
-    //         $timeout(LoadBuffer(), 300*delay); 
-    //       } 
-    
-    // LoadNextImage(); 
+    $sails.get('http://127.0.0.1:1337/camera/3')
+      .success(function (data, status, headers, jwr) {
+       console.log (data);
+       console.log (jwr);
+       console.log (status);
+       
+       
+      })
+      .error(function (data, status, headers, jwr) {
+        alert('Houston, we got a problem!');
+      });
+     $sails.on("camera", function (message) {
+       switch(message.verb){
+          case "updated" : 
+         $scope.camera =  message.data[0]
+          break;
+       }
+      console.log('youpi')
+      console.log(message)
+    });
     
     return $scope.camera;
 
