@@ -1,17 +1,16 @@
-angular.module('starter.controllers.CameraSettingsCtrl', [])
-  .controller('CameraSettingsCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService, roleService){
+angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
+  .controller('CameraSettingsCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService, roleService, $sails){
       console.log('ok');
 
       cameraService.get($stateParams.camid)
       .then(function(response){
           $scope.camera = response;
-          console.log($scope.camera);
           return $scope.camera;
       });
 
       roleService.get($stateParams.camid)
       .then(function (response) {
-          $scope.users = response.data;
+          $scope.users = response;
           return $scope.users;
       });
 
@@ -37,4 +36,27 @@ angular.module('starter.controllers.CameraSettingsCtrl', [])
           $state.go('tab.userRole', { ucrid: ucrid });
       }
 
+      $sails.on('usercamerarole', function (message) {
+          console.log($scope.users);
+          console.log(message);
+        var messageId = message.data.id;
+        var i=0;
+        for(key in $scope.users) {
+            if($scope.users.hasOwnProperty(key)) {
+              if($scope.users[i].id == messageId)
+              {
+                  switch(message.verb){
+                    case "updated" : 
+                      $scope.users[i] =  message.data;
+                    break;
+                    case "created" :
+                    break;
+                    case "deleted" :
+                    break;
+                }
+              }
+                i++;
+            }
+        }
+        });
   });

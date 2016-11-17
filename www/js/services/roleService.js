@@ -1,85 +1,84 @@
-﻿angular.module('starter.services.roleService', [])
-  .service('roleService', function ($http, storageService) {
+﻿angular.module('starter.services.roleService', ['ngSails'])
+  .service('roleService', function ($http, storageService, $sails, $q) {
 
       // GET Camera users
       this.get = function (camId) {
-          return $http({
+          var defered = $q.defer();
+           $sails.request({
               method: 'GET',
               url: 'http://127.0.0.1:1337/usercamerarole/' + camId + '/users',
               headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
                   'Authorization': 'JWT ' + storageService.getStorage('token')
-              },
-              dataType: 'json',
-              crossDomain: 'true'
-          },
-          function (err) {
-              console.log(err);
-              return err;
-          });
-      }
+              }
+           }, function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
+      };
 
       this.getUcrById = function (ucrid) {
-          return $http({
+          var defered = $q.defer();
+           $sails.request({
               method: 'GET',
               url: 'http://127.0.0.1:1337/usercamerarole/' + ucrid + '/role',
               headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
                   'Authorization': 'JWT ' + storageService.getStorage('token')
-              },
-              dataType: 'json',
-              crossDomain: 'true'
-          },
-          function (err) {
-              console.log(err);
-              return err;
-          });
-      }
+              }
+          }, function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
+      };
 
       // GET All roles
       this.getRoles = function (camId) {
-          return $http({
+          var defered = $q.defer();
+           $sails.request({
               method: 'GET',
               url: 'http://127.0.0.1:1337/role',
               headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
                   'Authorization': 'JWT ' + storageService.getStorage('token')
-              },
-              dataType: 'json',
-              crossDomain: 'true'
-          },
-          function (err) {
-              console.log(err);
-              return err;
-          });
-      }
+              }
+           }, function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
+      };
 
       this.updateRole = function (ucrid, roleid) {
-          return $http({
+          var defered = $q.defer();
+           $sails.request({
               method: 'PUT',
               url: 'http://127.0.0.1:1337/usercamerarole/update',
               headers: {
                   "Content-Type": 'application/x-www-form-urlencoded',
                   "Authorization": 'JWT ' + storageService.getStorage('token')
               },
-              dataType: 'json',
-              transformRequest: function (obj) {
-                  var str = [];
-                  for (var p in obj)
-                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                  return str.join("&");
-              },
-              data: { role: roleid, id: ucrid },
-              crossDomain: 'true'
-          })
-          .then(function (response) {
-              return response;
-          })
-          .error(function (response) {
-              console.log('Erreur : ' + JSON.stringify(response));
-              return response;
-          });
-      }
+              data: { role: roleid, id: ucrid }
+          }, function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
+      };
 
 
 

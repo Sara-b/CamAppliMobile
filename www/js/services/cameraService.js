@@ -32,16 +32,17 @@ angular.module('starter.services.cameraService', ['ngSails'])
                 }
             }, function (resData, jwres) {
                 if (jwres.error) {
+                    console.log("error :(")
                     return defered.reject(jwres.error);
                 }
+                console.log("yess");
                 return defered.resolve(resData);
             });
 
             return defered.promise;
-        };
+        }
 
         this.update = function (camera) {
-            console.log("hey");
             var defered = $q.defer();
             var etat = camera.switchOn ? 'on' : 'off';
             $sails.request({
@@ -50,7 +51,7 @@ angular.module('starter.services.cameraService', ['ngSails'])
                 headers: {
                     "Content-Type": 'application/x-www-form-urlencoded',
                     "Authorization": 'JWT ' + storageService.getStorage('token')
-                },
+                }
             }, function (resData, jwres) {
                 if (jwres.error) {
 
@@ -61,6 +62,7 @@ angular.module('starter.services.cameraService', ['ngSails'])
 
             return defered.promise;
         };
+
 
         // Ajout de camera : addCameraCtrl
         this.addCamera = function (camera) {

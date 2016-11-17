@@ -1,5 +1,5 @@
 angular.module('starter.controllers.CameraCtrl', ['ngSails'])
-    .controller('CameraCtrl', function ($state, $scope, $stateParams, cameraService, $sails) {
+    .controller('CameraCtrl', function ($location, $state, $scope, $stateParams, cameraService, logService, storageService, $sails) {
 
         camera = cameraService.get($stateParams.id);
 
@@ -41,5 +41,48 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
             });
         };
 
+        // $scope.switch = function(){
+        //   console.log("switch");
+        //   cameraService.update($scope.camera);
+        //   console.log($scope.camera.switchOn);
+        //
+        //   var etat;
+        //
+        //   if($scope.camera.switchOn == false){
+        //     etat = "Eteinds";
+        //     return etat;
+        //   }else{
+        //     etat = "Allume";
+        //     return etat;
+        //   }
+        //
+        //   logData = {
+        //       "user": JSON.parse(storageService.getStorage('data')).user.id,
+        //       "camera": $stateParams.id,
+        //       "event": etat + " la caméra"
+        //     };
+        //   logService.add(logData)
+        //   .then(function(response){
+        //     console.log(response.data);
+        //   })
+        // }
 
+        $scope.$watch(function () {
+            return $location.path();
+        }, function (url) {
+            var model = new RegExp('\/tab\/camera\/([0-9]{1,2})');
+            if (!url.match(model)) {
+                logData = {
+                    "user": JSON.parse(storageService.getStorage('data')).user.id,
+                    "camera": $stateParams.id,
+                    "event": "Ferme la caméra"
+                };
+                logService.add(logData)
+                    .then(function (response) {
+                        console.log(response.data);
+                    });
+            }
+        });
+
+        return $scope.camera;
     });
