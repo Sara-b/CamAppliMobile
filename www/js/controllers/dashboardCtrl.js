@@ -1,5 +1,5 @@
-angular.module('starter.controllers.DashboardCtrl', [])
-  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, cameraService, userService, storageService) {
+angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
+  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, $sails, cameraService, userService, storageService) {
 
     $scope.dataStored = storageService.getStorage('data');
 
@@ -14,8 +14,6 @@ angular.module('starter.controllers.DashboardCtrl', [])
         data.then(function (response) {
 
         $scope.cameras = response;
-
-
         
           for(i = 0; i < $scope.cameras.length; i++){
             
@@ -44,16 +42,45 @@ angular.module('starter.controllers.DashboardCtrl', [])
             $scope.isOwner = $scope.cameras[i].isOwner;
           }
 
-        // display on/off icon
-
-        // console.log($scope.cameras);
-
           return $scope.cameras;
         });
+    }
 
-      $scope.addCamera = function(){
-        $state.go('tab.addCamera');
-      }
+  $sails.on('camera', function (message) {
+      console.log(message);
+      var messageId = message.data[0].id;
+      var i =0;
+      for(key in $scope.cameras) {
+            if($scope.cameras.hasOwnProperty(key)) {
+              if($scope.cameras[i].camera.id == messageId)
+              {
+                  switch(message.verb){
+                    case "updated" : 
+                      $scope.cameras[i].camera =  message.data[0];
+
+                      if($scope.cameras[i].camera.switchOn == true){
+                          $scope.cameras[i].color = "green";
+                        }else{
+                          $scope.cameras[i].color = "red";
+                        }
+                    break;
+                    case "created" :
+                    // console.log(message);
+                    //   $scope.cameras.push(message.data[0]);
+                    break;
+                    case "deleted" :
+                    break;
+                }
+              }
+                i++;
+            }
+        }
+       
+      
+    });
+
+    $scope.addCamera = function(){
+      $state.go('tab.addCamera');
     }
 
     $scope.openSettings = function (cameraid) {

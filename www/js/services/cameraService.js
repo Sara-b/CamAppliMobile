@@ -32,8 +32,10 @@ angular.module('starter.services.cameraService', ['ngSails'])
             }
            }, function (resData, jwres) {
             if (jwres.error) {
+                console.log("error :(")
                 return defered.reject(jwres.error);
             }
+                console.log("yess");            
             return  defered.resolve(resData);
             });
 
@@ -41,7 +43,6 @@ angular.module('starter.services.cameraService', ['ngSails'])
     }
     
      this.update = function(camera) {
-         console.log("hey");
         var defered = $q.defer();
          var etat = camera.switchOn ? 'on' : 'off';
          $sails.request({
