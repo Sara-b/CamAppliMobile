@@ -61,4 +61,24 @@ angular.module('starter.services.userService', [])
         return err;
       });
     }
+
+      // GET All users
+    this.getAllUsers = function () {
+        //Récupérer tous les utilisateurs
+        //Au moment de la validation, si il existe deja un ucr avec le meme camid et le meme userid, message d'erreur
+        return $http({
+            method: 'GET',
+            url: 'http://127.0.0.1:1337/user/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'JWT ' + storageService.getStorage('token')
+            },
+            dataType: 'json',
+            crossDomain: 'true'
+        },
+        function (err) {
+            console.log(err);
+            return err;
+        });
+    }
   });
