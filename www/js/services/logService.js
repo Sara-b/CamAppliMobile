@@ -1,5 +1,6 @@
 angular.module('starter.services.logService', [])
   .service('logService', function($http, storageService){
+    
     this.add = function(log){
       return $http({
         method: 'POST',

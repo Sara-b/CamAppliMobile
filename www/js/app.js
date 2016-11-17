@@ -170,14 +170,4 @@ angular.module('starter', [
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/login');
 
-})
-
-  .factory('Interceptor', function($window){
-    var token = window.sessionStorage.getItem('token');
-    return {
-      response: function(config){
-        config.headers['Authorization'] = 'JWT ' + token;
-        return config;
-      }
-    }
-  });
+});
