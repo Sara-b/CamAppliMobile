@@ -1,5 +1,5 @@
 angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
-    .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, $sails, cameraService, userService, storageService) {
+    .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, $sails, cameraService, userService, storageService, logService) {
 
         $scope.dataStored = storageService.getStorage('data');
 
@@ -41,6 +41,18 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
                     // console.log(cameraSwitch + ' ' + $scope.class);
 
                     $scope.isOwner = $scope.cameras[i].isOwner;
+
+                    $scope.openCamera = function(camid){
+                    logData = {
+                      "user": userId,
+                      "camera": camid,
+                      "event": "Ouvre la caméra"
+                    };
+                    logService.add(logData)
+                    .then(function(response){
+                      console.log(response.data);
+                    });
+                  }
                 }
 
                 return $scope.cameras;
