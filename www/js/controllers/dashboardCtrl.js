@@ -75,8 +75,6 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
                 i++;
             }
         }
-       
-      
     });
 
     $scope.addCamera = function(){
