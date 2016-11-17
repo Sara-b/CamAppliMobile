@@ -13,6 +13,7 @@ angular.module('starter.controllers.DashboardCtrl', [])
       var data = cameraService.getAll(userid);
       data.then(function (response) {
 
+<<<<<<< HEAD
         $scope.cameras = response.data;
         for(i = 0; i < $scope.cameras.length; i++){
           var isOwner;
@@ -26,6 +27,9 @@ angular.module('starter.controllers.DashboardCtrl', [])
           }else{
             $scope.cameras[i].isOwner = false;
           }
+=======
+        $scope.cameras = response;
+>>>>>>> d7c5cb27152074dda040ea4955ba21e44e2c75a9
 
           // display on/off icon
           if(cameraSwitch == true){
