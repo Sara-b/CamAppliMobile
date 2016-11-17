@@ -7,7 +7,7 @@
 
     <div class="item range">
       <i class="icon ion-arrow-left-b"></i>
-      <input type="range" name="rotation">
+        <input type="range" name="rotation" id="angle_slider" class="vHorizon" min="4" max="180">
       <i class="icon ion-arrow-right-b"></i>
     </div>
 
@@ -16,12 +16,15 @@
           Etat de la caméra :
         </label>
         <label class="toggle toggle-balanced">
-          <input ng-model="camera.switchOn" type="checkbox">
+          <input ng-model="camera.switchOn" type="checkbox" ng-click="switch()">
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
     </div>
+
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="../js/rotation.js"  type="text/javascript" ></script>
 
   </ion-content>
 </ion-view>
