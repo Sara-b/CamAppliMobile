@@ -37,26 +37,27 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
       }
 
       $sails.on('usercamerarole', function (message) {
-          console.log($scope.users);
-          console.log(message);
+        console.log($scope.users);
+        console.log(message);
         var messageId = message.data.id;
-        var i=0;
-        for(key in $scope.users) {
-            if($scope.users.hasOwnProperty(key)) {
-              if($scope.users[i].id == messageId)
-              {
-                  switch(message.verb){
-                    case "updated" : 
-                      $scope.users[i] =  message.data;
-                    break;
-                    case "created" :
-                    break;
-                    case "deleted" :
-                    break;
+            switch(message.verb){
+            case "updated" : 
+            var i=0;
+            for(key in $scope.users) {
+                if($scope.users.hasOwnProperty(key)) {
+                    if($scope.users[i].id == messageId)
+                    {
+                        $scope.users[i] =  message.data;
+                    }
                 }
-              }
-                i++;
+                i++
             }
-        }
+            break;
+            case "created" :
+                console.log(message);
+            break;
+            case "destroyed" :
+            break;
+            }
         });
   });

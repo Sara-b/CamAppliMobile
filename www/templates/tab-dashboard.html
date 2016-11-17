@@ -4,9 +4,9 @@
 
       <ion-list ng-repeat="camera in cameras" id="page-list1 cam-tab" ng-switch on="camera.isOwner">
         <ion-item class="item-icon-right" id="page-list-item4">
-            <a ng-click="openCamera({{camera.camera.id}})" href="#/tab/camera/{{camera.camera.id}}">{{camera.camera.name}}</a>
+            <a ng-click="openCamera({{camera.id}})" href="#/tab/camera/{{camera.id}}">{{camera.name}}</a>
             <i class="icon ion-record {{camera.color}}"></i>
-            <a ng-click="openSettings({{camera.camera.id}})" ng-switch-when="true"><i class="icon ion-settings"></i> </a>
+            <a ng-click="openSettings({{camera.id}})" ng-switch-when="true"><i class="icon ion-settings"></i> </a>
         </ion-item>
       </ion-list>
   </ion-content>
