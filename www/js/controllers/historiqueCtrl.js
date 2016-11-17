@@ -11,8 +11,7 @@ angular.module('starter.controllers.HistoriqueCtrl', [])
   $scope.query = logService.getByCamera(camId)
     .then(function(response){
       $scope.logs = response.data;
-
-      console.log($scope.users);
+      console.log($scope.logs);
     });
   
 

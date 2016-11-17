@@ -35,17 +35,24 @@ angular.module('starter.controllers.DashboardCtrl', [])
           }
 
           $scope.isOwner = $scope.cameras[i].isOwner;
+
+          var logData = {"user": "","camera": "","event": "Ouvre la caméra"};
+
+          $scope.openCamera = function(camid){
+            logData = {
+              "user": userId,
+              "camera": camid,
+              "event": "Ouvre la caméra"
+            };
+            logService.add(logData)
+            .then(function(response){
+              console.log(response.data);
+            });
+          }
+
         }
 
-        var logData = {
-          "user": userId,
-          "camera": cameraId,
-          "event": "Ouvre la caméra"
-        }
 
-        $scope.openCamera = function(){
-          logService.add(logData).then(function(response){console.log(response);});
-        }
 
           return $scope.cameras;
       });

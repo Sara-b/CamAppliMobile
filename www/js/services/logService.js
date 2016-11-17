@@ -9,8 +9,16 @@ angular.module('starter.services.logService', [])
           'Authorization' : 'JWT ' + storageService.getStorage('token')
         },
         dataType: 'json',
+        transformRequest: function (obj) {
+          var str = [];
+          for (var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          return str.join("&");
+        },
         data: log,
         crossDomain: 'true'
+      }).then(function(response){
+        return response;
       });
     }
 
