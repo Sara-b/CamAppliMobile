@@ -30,6 +30,27 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
     $scope.switch = function(){
       console.log("switch");
       cameraService.update($scope.camera);
+      console.log($scope.camera.switchOn);
+
+      var etat;
+
+      if($scope.camera.switchOn == false){
+        etat = "Eteinds";
+        return etat;
+      }else{
+        etat = "Allume";
+        return etat;
+      }
+      
+      logData = {
+          "user": JSON.parse(storageService.getStorage('data')).user.id,
+          "camera": $stateParams.id,
+          "event": etat + " la caméra"
+        };
+      logService.add(logData)
+      .then(function(response){
+        console.log(response.data);
+      })
     }
     
     $scope.$watch(function(){
