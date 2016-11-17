@@ -1,5 +1,5 @@
 angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
-  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, $sails, cameraService, userService, storageService) {
+  .controller('DashboardCtrl', function ($http, $state, $scope, $stateParams, $sails, cameraService, userService, storageService, logService) {
 
     $scope.dataStored = storageService.getStorage('data');
     var userid ="";
@@ -26,37 +26,32 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
 
         $scope.cameras = cameras;
         
-          for(i = 0; i < $scope.cameras.length; i++){
+        for(i = 0; i < $scope.cameras.length; i++){
             var isOwner;
             var cameraOwnerId = $scope.cameras[i].owner;
             var cameraSwitch = $scope.cameras[i].switchOn;
 
-            // console.log($scope.cameras[i].camera);
-
             // display admin settings button
             
             if(userid == cameraOwnerId){
-              console.log("true");
               $scope.cameras[i].isOwner = true;
             }else{
               $scope.cameras[i].isOwner = false;
-              console.log("false");
             }
 
+            //display color settings
             if(cameraSwitch == true){
-              $scope.cameras[i].color = "green";
+                $scope.cameras[i].color = "green";
             }else{
-              $scope.cameras[i].color = "red";
+                $scope.cameras[i].color = "red";
             }
 
-            // console.log(cameraSwitch + ' ' + $scope.class);
-
-            $scope.isOwner = $scope.cameras[i].isOwner;
-          }
-
-          return $scope.cameras;
-        });
-    }
+            $scope.isOwner = $scope.cameras[i].isOwner; 
+        }
+        return $scope.cameras;
+        
+    });
+}
 
   $sails.on('camera', function (message) {
       console.log(message);
@@ -112,11 +107,23 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
         }
     });
 
-    $scope.addCamera = function(){
-      $state.go('tab.addCamera');
+    $scope.addCamera = function () {
+        $state.go('tab.addCamera');
     }
 
+    $scope.openCamera = function(camid){
+            logData = {
+                "user": userid,
+                "camera": camid,
+                "event": "Ouvre la caméra"
+            };
+            logService.add(logData)
+            .then(function(response){
+                console.log(response.data);
+            });
+        }  
+
     $scope.openSettings = function (cameraid) {
-        $state.go('tab.camera-settings', { camid: cameraid });
+        $state.go('tab.camera-settings', {camid: cameraid});
     }
 });

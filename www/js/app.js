@@ -19,6 +19,7 @@ angular.module('starter', [
   'starter.controllers.LogoutCtrl',
   'starter.controllers.UserRolesCtrl',
   'starter.controllers.HistoriqueCtrl',
+  'starter.controllers.AddUserCtrl',
 
   'starter.services.userService',
   'starter.services.cameraService',
@@ -165,7 +166,16 @@ angular.module('starter', [
             controller: 'UserRolesCtrl'
           }
         }
-    });
+  })
+  .state('tab.addUserCamera', {
+    url: '/camera/:camid/addUsers/users',
+    views: {
+        'content': {
+            templateUrl: 'templates/tab-addUser.html',
+            controller: 'AddUserCtrl'
+        }
+    }
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/mLog/login');

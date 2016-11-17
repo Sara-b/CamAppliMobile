@@ -32,6 +32,10 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
             })
       }
 
+      $scope.navigateAddUser = function () {
+          $state.go('tab.addUserCamera', { camid: $scope.camera.id });
+      }
+
       $scope.navigateUserRole = function (ucrid, response) {
           $state.go('tab.userRole', { ucrid: ucrid });
       }

@@ -22,7 +22,7 @@
               .then(function (response) {
                   if (response.status == 200) {
                       console.log($scope.ucr);
-                      $state.go('tab.camera-settings', { camid: $scope.camera.id });
+                      window.location.reload(window.history.back());
                   } else {
                       $scope.message = 'Une erreur est survenue';
                       return $scope.message;
