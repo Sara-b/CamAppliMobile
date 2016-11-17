@@ -1,39 +1,66 @@
 angular.module('starter.services.cameraService', ['ngSails'])
-  .service('cameraService', function($http, storageService,$sails){
+  .service('cameraService', function($http, storageService,$sails,$q){
 
       this.get = function (cameraId) {
-        return $http({
-          method: 'GET',
-          url: 'http://127.0.0.1:1337/camera/' + cameraId,
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization' : 'JWT ' + storageService.getStorage('token')
-          },
-          dataType: 'json',
-          crossDomain: 'true'
-        },
-        function(err){
-          console.log(err);
-          return err;
-        });
+          var defered = $q.defer();
+           $sails.request({
+            method: 'GET',
+            url: 'http://127.0.0.1:1337/camera/' + cameraId,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization' : 'JWT ' + storageService.getStorage('token')
+            }
+           }, function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
       };
     
-    //TODO remettre le header
+ 
     this.getAll = function(params){
-      return $sails.get('http://127.0.0.1:1337/usercamerarole/'+ params +'/cameras')
-     }, function(err){
-        console.log(err);
-        console.log('Houston, we got a problem!');
+        var defered = $q.defer();
+           $sails.request({
+            method: 'GET',
+            url: 'http://127.0.0.1:1337/usercamerarole/'+ params +'/cameras',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization' : 'JWT ' + storageService.getStorage('token')
+            }
+           }, function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
+    }
+    
+     this.update = function(camera) {
+         console.log("hey");
+        var defered = $q.defer();
+         var etat = camera.switchOn ? 'on' : 'off';
+         $sails.request({
+            method: 'PUT',
+            url: 'http://127.0.0.1:1337/camera/switch/' + camera.id + '/' +etat,
+            headers: {
+                "Content-Type": 'application/x-www-form-urlencoded',
+                "Authorization": 'JWT ' + storageService.getStorage('token')
+            }
+         }, function (resData, jwres) {
+            if (jwres.error) {
+
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+            });
+
+            return defered.promise;
       };
-    
-        // headers: {
-        //   'Content-Type': 'application/x-www-form-urlencoded',
-        //   'Authorization': 'JWT ' + storageService.getStorage('token')
-        // },
-       // dataType: 'json',
-       // crossDomain: 'true'
-    
-     
    
 
   	// Ajout de camera : addCameraCtrl
