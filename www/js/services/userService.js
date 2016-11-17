@@ -1,5 +1,5 @@
-angular.module('starter.services.userService', [])
-  .service('userService', function($http, $window, storageService){
+angular.module('starter.services.userService', ['ngSails'])
+  .service('userService', function($http,$window,storageService,$sails,$q){
 
     // registerCtrl
     this.registration = function (user) {
@@ -21,32 +21,29 @@ angular.module('starter.services.userService', [])
 
     // userUpdate
     this.update = function (user) {
-      return $http({
-        method: 'PUT',
-        url: 'http://127.0.0.1:1337/user/update',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization' : 'JWT ' + storageService.getStorage('token')
-        },
-        dataType: 'json',
-        transformRequest: function(obj) {
-            var str = [];
-            for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-        },
-        data: user,
-        crossDomain: 'true'
-      },
-      function(err){
-        console.log(err);
-        return err;
-      });
+        var defered = $q.defer();
+        $sails.request({
+            method: 'PUT',
+            url: 'http://127.0.0.1:1337/user/update',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization' : 'JWT ' + storageService.getStorage('token')
+            },
+            data: user,
+        }, function (resData, jwres) {
+              if (jwres.error) {
+                  return defered.reject(jwres.error);
+              }
+              return  defered.resolve(resData);
+        });
+
+            return defered.promise;
     };
 
     // userGet
     this.get = function (userId) {
-      return $http({
+        var defered = $q.defer();
+        $sails.request({
         method: 'GET',
         url: 'http://127.0.0.1:1337/user/' + userId,
         headers: {
@@ -56,16 +53,19 @@ angular.module('starter.services.userService', [])
         dataType: 'json',
         crossDomain: 'true'
       },
-      function(err){
-        console.log(err);
-        return err;
-      });
-    }
+       function (resData, jwres) {
+            if (jwres.error) {
+                return defered.reject(jwres.error);
+            }
+            return  defered.resolve(resData);
+        });
+
+        return defered.promise;
+    };
+
 
       // GET All users
     this.getAllUsers = function () {
-        //Récupérer tous les utilisateurs
-        //Au moment de la validation, si il existe deja un ucr avec le meme camid et le meme userid, message d'erreur
         return $http({
             method: 'GET',
             url: 'http://127.0.0.1:1337/user/',

@@ -9,8 +9,8 @@ angular.module('starter.controllers.ProfilCtrl', [])
 
     user.then(function(result){
       console.log(result);
-      $scope.data = result.data;
-      console.log($scope.data);
+      $scope.data = result;
+      console.log($scope);
       $scope.user = {
         id: $scope.data.id,
         firstname: $scope.data.firstname,
@@ -29,8 +29,8 @@ angular.module('starter.controllers.ProfilCtrl', [])
       userService.update($scope.user).then(function (response) {
         $scope.user.password = "";
         console.log($scope.user);
-        console.log(response.data);
-        data = '{"token":"' + storageService.getStorage('token') + '","user":' + JSON.stringify(response.data[0]) + '}';
+        console.log(response);
+        data = '{"token":"' + storageService.getStorage('token') + '","user":' + JSON.stringify(response[0]) + '}';
         console.log(data);
         storageService.updateStorage('data', data);
         console.log(storageService.getStorage('data'));

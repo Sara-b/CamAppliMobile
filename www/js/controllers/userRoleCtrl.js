@@ -1,17 +1,17 @@
-﻿angular.module('starter.controllers.UserRolesCtrl', [])
-  .controller('UserRolesCtrl', function ($http, $state, $scope, $stateParams, storageService, roleService) {
+﻿angular.module('starter.controllers.UserRolesCtrl', ['ngSails'])
+  .controller('UserRolesCtrl', function ($http, $state, $scope, $sails, $stateParams, storageService, roleService) {
       console.log('ok');
 
 
       roleService.getRoles()
       .then(function (response) {
-          $scope.roles = response.data;
+          $scope.roles = response;
           return $scope.roles;
       });
 
       roleService.getUcrById($stateParams.ucrid)
       .then(function (response) {
-          $scope.ucr = response.data;
+          $scope.ucr = response;
           return $scope.ucr;
       });
 
@@ -32,5 +32,13 @@
                   return err;
               })
       }
+
+      $sails.on("usercamerarole", function (message) {
+       switch(message.verb){
+          case "updated" : 
+         $scope.ucr.role =  message.data.role
+          break;
+       }
+    });
 
   });
