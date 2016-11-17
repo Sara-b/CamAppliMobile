@@ -2,9 +2,7 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
   .controller('CameraCtrl', function($location, $state, $scope, $stateParams, cameraService, logService, storageService, $sails){
       
     camera = cameraService.get($stateParams.id);
-
-    console.log($stateParams.id);
-
+    
     $scope.data = "";
 
     camera.then(function(result){
