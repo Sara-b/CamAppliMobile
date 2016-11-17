@@ -1,0 +1,13 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/node_modules
+/bower_components
+/plugins
+/platforms
+/taco.json
+/CamAppliMobile.sln
+/CamAppliMobile.jsproj.user
+/CamAppliMobile.jsproj

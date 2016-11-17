@@ -1,0 +1,42 @@
+﻿<ion-view view-title="Propriétés">
+    <ion-content class="padding">
+<!--         <button class="button button-block button-balanced"> -->
+            <a href="#/tab/camera/{{camera.id}}/historique">Historique</a>
+        <!-- </button> -->
+        <form>
+            <label class="item item-input" id="page-input1">
+                <span class="input-label">Editer le nom :</span>
+                <input ng-model="camera.name" type="text">
+            </label>
+            <button ng-click="updateName()" type="submit" class="button button-block button-balanced">
+                Valider
+            </button>
+        </form>
+
+        <div class="item item-body" id="page-list-item-container1">
+            <div id="page-markdown3">
+                <p style="margin-top:0px;color:#000000;">Nom : {{camera.name}}</p>
+                <p style="color:#000000;">Etat : {{camera.switchOn}}</p>
+                <p style="color:#000000;">Socket : {{camera.socket}}</p>
+                <p style="color:#000000;">Propriétaire : {{camera.owner.firstname}} {{camera.owner.lastname}}</p>
+            </div>
+        </div>
+
+        <!--<div class="item item-body" id="page-list-item-container1">-->
+            <h3>Utilisateurs :</h3>
+        <button ng-click="navigateAddUser()" class="button button-block button-balanced">
+            Ajouter un utilisateur
+        </button>
+        <ion-list ng-repeat="user in users" id="page-list1 cam-tab">
+
+            <ion-item class="item-icon-right" id="page-list-item4">
+                <h2>{{user.user.firstname}} {{user.user.lastname}}</h2>
+                <p> {{user.role.name}} </p>
+                <a ng-click="navigateUserRole(user.id)"> <i class="icon ion-settings"></i> </a>
+                <!--<a ng-click=""> <i class="icon ion-trash-a"></i> </a>-->
+            </ion-item>
+        </ion-list>
+        <!--</div>-->
+
+</ion-content>
+</ion-view>
