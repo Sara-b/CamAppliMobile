@@ -3,14 +3,13 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
 
         $scope.dataStored = storageService.getStorage('data');
         var userid = "";
-
+        
         if ($scope.dataStored == "") {
             $state.reload();
         }
         else {
             $scope.user = JSON.parse($scope.dataStored);
             userid = $scope.user.user.id;
-
             var data = cameraService.getAll(userid);
             data.then(function (response) {
 

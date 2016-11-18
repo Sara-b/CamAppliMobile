@@ -6,7 +6,7 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
       .then(function(response){
           $scope.camera = response;
           if ($scope.camera.switchOn == true) {
-              $scope.switchOn = "Allumé";
+              $scope.switchOn = "AllumÃ©";
           }
           else {
               $scope.switchOn = "Eteint";
