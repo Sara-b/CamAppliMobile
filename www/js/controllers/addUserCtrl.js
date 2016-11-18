@@ -22,29 +22,23 @@
       });
 
       $scope.data = {
-          selectUser : -1,
-          selectRole : -1
-      }
+          selectUser: -1,
+          selectRole: -1
+      };
 
-      $scope.showAlert = function ($titre, $message) {
-          var alertPopup = $ionicPopup.alert({
-              title: $titre,
-              template: $message
-          });
-      }
 
       $scope.addUser = function () {
           var userExist = false;
-          var i=0;
-          for(key in $scope.cameraUsers) {
-            if($scope.cameraUsers.hasOwnProperty(key)) {
-                if ($scope.cameraUsers[i].user.id == $scope.data.selectUser) {
-                  userExist = true;
-                  break;
+          var i = 0;
+          for (key in $scope.cameraUsers) {
+              if ($scope.cameraUsers.hasOwnProperty(key)) {
+                  if ($scope.cameraUsers[i].user.id == $scope.data.selectUser) {
+                      userExist = true;
+                      break;
+                  }
               }
-            }
-            i++
-        }
+              i++
+          }
 
           if ($scope.data.selectUser == -1 || $scope.data.selectRole == -1) {
               $scope.showAlert("Ajout utilisateur", "Vous devez sélectionner un utilisateur et un rôle");
@@ -60,5 +54,13 @@
               window.location.reload(window.history.back());
               $scope.showAlert("Ajout utilisateur", "Ajout réussi");
           }
-      }
+      };
+
+
+      $scope.showAlert = function ($titre, $message) {
+          var alertPopup = $ionicPopup.alert({
+              title: $titre,
+              template: $message
+          });
+      };
   });
