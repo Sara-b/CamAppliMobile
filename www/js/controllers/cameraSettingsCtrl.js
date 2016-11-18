@@ -93,11 +93,27 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
                     })
         };
 
+        $scope.deleteCam = function ($titre, $message) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Suppression cam�ra',
+                template: "Voulez vous vraiment suppimer cette cam�ra ?"
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    console.log('You are sure' + $scope.camera.id);
+                    cameraService.deleteCamera($scope.camera.id);
+                    window.location.reload(window.history.back());
+                } else {
+                    console.log('You are not sure');
+                }
+            });
+        };
 
         $scope.showConfirm = function (ucrid) {
             var confirmPopup = $ionicPopup.confirm({
-            title: 'Suppression',
-            template: "Êtes vous sûr de vouloir supprimer l'utilisateur sur cette caméra ?"
+            title: 'Suppression utilisateur',
+            template: "Voulez vous vraiment supprimer l'utilisateur sur cette caméra ?"
             });
 
             confirmPopup.then(function (res) {
