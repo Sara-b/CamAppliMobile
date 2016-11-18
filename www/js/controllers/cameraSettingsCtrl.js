@@ -49,12 +49,10 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
       }
 
         $sails.on('usercamerarole', function (message) {
-            console.log($scope.users);
-            console.log(message);
-            var messageId = message.data.id;
             switch (message.verb) {
                 case "updated" :
-                    var i = 0;
+                    var messageId = message.data.id;
+                    var i=0;
                     for (key in $scope.users) {
                         if ($scope.users.hasOwnProperty(key)) {
                             if ($scope.users[i].id == messageId) {
@@ -63,19 +61,30 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
                         }
                         i++
                     }
-                    break;
+                break;
                 case "created" :
-                    console.log(message);
-                    break;
+                    $scope.users.push(message.data);
+                break;
                 case "destroyed" :
-                    break;
-            }
-        });
+                    var i=0;
+                    var messageId = message.id;
+                    for(key in $scope.users) {
+                        if($scope.users.hasOwnProperty(key)) {
+                            if($scope.users[i].id == messageId)
+                            {
+                                $scope.users.splice(i, 1);
+                            }
+                        }
+                        i++
+                    }
+                break;
+                }
+      });
 
-        $scope.showConfirm = function (ucrid) {
+      $scope.showConfirm = function (ucrid) {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Suppression',
-                template: 'Etes vou s�r de vouloir supprimer cet utilisateur ?'
+            title: 'Suppression',
+            template: "Êtes vous sûr de vouloir supprimer l'utilisateur sur cette caméra ?"
             });
 
             confirmPopup.then(function (res) {
