@@ -1,5 +1,5 @@
 ﻿angular.module('starter.controllers.AddUserCtrl', [])
-  .controller('AddUserCtrl', function ($scope, $state, roleService, storageService, $stateParams, userService) {
+  .controller('AddUserCtrl', function ($scope, $ionicPopup, $state, roleService, storageService, $stateParams, userService) {
 
       $scope.camid = $stateParams.camid
       
@@ -26,6 +26,12 @@
           selectRole : -1
       }
 
+      $scope.showAlert = function ($message) {
+          var alertPopup = $ionicPopup.alert({
+              title: 'Ajout utilisateur',
+              template: $message
+          });
+      }
 
       $scope.addUser = function () {
           var userExist = false;
@@ -41,16 +47,10 @@
         }
 
           if ($scope.data.selectUser == -1 || $scope.data.selectRole == -1) {
-              alert("Vous devez sélectionner un utilisateur et un rôle");
-              //return $scope.showAlert = function () {
-              //    var alertPopup = $ionicPopup.alert({
-              //        title: 'Ajout utilisateur',
-              //        template: 'Cet utilisateur a déjà été ajouté à la camera'
-              //    });
-              //}
+              $scope.showAlert("Vous devez sélectionner un utilisateur et un rôle");
           }
           else if (userExist) {
-              alert("Cet utilisateur a déjà été ajouté à la camera");
+              $scope.showAlert("Cet utilisateur a déjà été ajouté à la camera");
           }
           else {
               roleService.addUCR($scope.camid, $scope.data.selectUser, $scope.data.selectRole)

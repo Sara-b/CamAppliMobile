@@ -5,7 +5,13 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
       cameraService.get($stateParams.camid)
       .then(function(response){
           $scope.camera = response;
-          return $scope.camera;
+          if ($scope.camera.switchOn == true) {
+              $scope.switchOn = "Allumé";
+          }
+          else {
+              $scope.switchOn = "Eteint";
+          }
+          return $scope;
       });
 
       roleService.get($stateParams.camid)
@@ -14,7 +20,8 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
           return $scope.users;
       });
 
-
+      
+          
 
       $scope.updateName = function (response) {
           cameraService.updateCam($scope.camera)
@@ -38,6 +45,10 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
 
       $scope.navigateUserRole = function (ucrid, response) {
           $state.go('tab.userRole', { ucrid: ucrid });
+      }
+
+      $scope.navigateHistorique = function (response) {
+          $state.go('tab.historique', { camid: $scope.camera.id });
       }
 
       $sails.on('usercamerarole', function (message) {
