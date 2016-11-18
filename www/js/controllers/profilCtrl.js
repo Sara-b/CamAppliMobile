@@ -35,7 +35,7 @@ angular.module('starter.controllers.ProfilCtrl', [])
                 storageService.updateStorage('data', data);
                 console.log(storageService.getStorage('data'));
             });
-            $scope.showAlert("Modification du profil", "La modification du profil s'est effectuée avec succés")
+            $scope.showAlert("Modification du profil", "La modification du profil s'est effectuÃ©e avec succÃ©s")
         }
 
         $scope.showAlert = function ($titre, $message) {
