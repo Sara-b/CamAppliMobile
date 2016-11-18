@@ -41,11 +41,9 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
       }
 
       $sails.on('usercamerarole', function (message) {
-        console.log($scope.users);
-        console.log(message);
-        var messageId = message.data.id;
-            switch(message.verb){
+        switch(message.verb){
             case "updated" : 
+            var messageId = message.data.id;
             var i=0;
             for(key in $scope.users) {
                 if($scope.users.hasOwnProperty(key)) {
@@ -58,10 +56,20 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
             }
             break;
             case "created" :
-                console.log(message);
                 $scope.users.push(message.data);
             break;
             case "destroyed" :
+                var i=0;
+                var messageId = message.id;
+                for(key in $scope.users) {
+                    if($scope.users.hasOwnProperty(key)) {
+                        if($scope.users[i].id == messageId)
+                        {
+                            $scope.users.splice(i, 1);
+                        }
+                    }
+                    i++
+                 }
             break;
             }
       });
@@ -69,7 +77,7 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
       $scope.showConfirm = function (ucrid) {
         var confirmPopup = $ionicPopup.confirm({
             title: 'Suppression',
-            template: 'Etes vou s�r de vouloir supprimer cet utilisateur ?'
+            template: "Êtes vou sûr de vouloir supprimer l'utilisateur sur cette caméra ?"
         });
 
         confirmPopup.then(function (res) {

@@ -102,7 +102,19 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
               }
               $scope.cameras.push(newCam);              
             break;
-            case "deleted" :
+            case "destroyed" :
+            console.log("destoy");
+                var i=0;
+                var messageId = message.id;
+                for(key in $scope.cameras) {
+                    if($scope.cameras.hasOwnProperty(key)) {
+                        if($scope.cameras[i].id == messageId)
+                        {
+                            $scope.cameras.splice(i, 1);
+                        }
+                    }
+                    i++
+                 }
             break;
         }
     });
