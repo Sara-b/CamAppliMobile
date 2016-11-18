@@ -11,13 +11,13 @@
 
       roleService.getRoles()
       .then(function (response) {
-          $scope.roles = response.data;
+          $scope.roles = response;
           return $scope.roles;
       });
 
       roleService.get($scope.camid)
       .then(function (response) {
-          $scope.cameraUsers = response.data;
+          $scope.cameraUsers = response;
           return $scope.cameraUsers;
       });
 
@@ -29,13 +29,16 @@
 
       $scope.addUser = function () {
           var userExist = false;
-
-          for (var i = 0; i < $scope.cameraUsers.length; i++) {
-              if ($scope.cameraUsers[i].user.id == $scope.data.selectUser) {
+          var i=0;
+          for(key in $scope.cameraUsers) {
+            if($scope.cameraUsers.hasOwnProperty(key)) {
+                if ($scope.cameraUsers[i].user.id == $scope.data.selectUser) {
                   userExist = true;
                   break;
               }
-          }
+            }
+            i++
+        }
 
           if ($scope.data.selectUser == -1 || $scope.data.selectRole == -1) {
               alert("Vous devez sélectionner un utilisateur et un rôle");
