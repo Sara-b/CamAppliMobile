@@ -29,11 +29,11 @@
             </button>
             <ion-list ng-repeat="user in users" id="page-list1 cam-tab">
 
-                <ion-item class="item-icon-right" id="page-list-item4">
+                <ion-item class="item-icon-right" id="page-list-item4" ng-switch on="user.isOwner">
                     <h2>{{user.user.firstname}} {{user.user.lastname}}</h2>
                     <p> {{user.role.name}} </p>
-                    <a ng-click="navigateUserRole(user.id)" class="icon ion-settings" style="text-decoration: none; color: inherit"> <!--<i class="icon ion-settings"></i>--> </a>
-                    <a ng-click="showConfirm({{user.id}})" style="text-decoration: none; color: inherit"> <i class="icon ion-trash-a"></i> </a>
+                    <a ng-click="navigateUserRole(user.id)" ng-switch-when="false" class="icon ion-settings" style="text-decoration: none; color: inherit"> <!--<i class="icon ion-settings"></i>--> </a>
+                    <a ng-click="showConfirm({{user.id}})" ng-switch-when="false" style="text-decoration: none; color: inherit"> <i class="icon ion-trash-a"></i> </a>
                 </ion-item>
             </ion-list>
             <!--</div>-->

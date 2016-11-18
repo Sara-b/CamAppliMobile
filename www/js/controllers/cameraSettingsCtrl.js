@@ -11,13 +11,21 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
           else {
               $scope.switchOn = "Eteint";
           }
+
           return $scope;
       });
        
         roleService.get($stateParams.camid)
         .then(function (response) {
             $scope.users = response;
-            return $scope.users;
+            for (var i = 0; i < $scope.users.length; i++) {
+                $scope.users[i].isOwner = false;
+                if ($scope.camera.owner.id == $scope.users[i].user.id) {
+                    $scope.users[i].isOwner = true;
+                }
+            }
+         
+            return $scope;
         });
 
 
