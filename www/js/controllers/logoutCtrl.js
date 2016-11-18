@@ -1,5 +1,5 @@
 angular.module('starter.controllers.LogoutCtrl', [])
-    .controller('LogoutCtrl', function ($window, $state, $location, storageService, $scope) {
+    .controller('LogoutCtrl', function ($window, $state, $location, storageService, $scope, $ionicHistory) {
         console.log('ok');
         $scope.deconnexion = 'ok';
         storageService.delStorage('data');
@@ -8,5 +8,6 @@ angular.module('starter.controllers.LogoutCtrl', [])
         storageService.delStorage('token');
 
         // $location.path('/tab/login');
-        $state.go('mLog.login');
+        $ionicHistory.clearCache().then(function(){ $state.go('mLog.login'); $window.location.reload(true)})
+        
     });
