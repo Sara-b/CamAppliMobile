@@ -51,7 +51,7 @@
                 .then(function (response) {
                     console.log(response);
                 });
-              window.location.reload(window.history.back());
+              window.history.back();
               $scope.showAlert("Ajout utilisateur", "Ajout réussi");
           }
       };

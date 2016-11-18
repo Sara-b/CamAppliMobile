@@ -80,7 +80,6 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
                 .then(function (response) {
                     if (response.status == 200) {
                         console.log($scope.user);
-                        $state.go('tab.camera-settings', { camid: $scope.camera.id });
                         $scope.showAlert("Renomage", "Le renommage de la caméra s'est effectuée avec succés");
                     } else {
                         $scope.message = 'Une erreur est survenue';
@@ -103,14 +102,14 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
                 if (res) {
                     console.log('You are sure' + $scope.camera.id);
                     cameraService.deleteCamera($scope.camera.id);
-                    window.location.reload(window.history.back());
+                    window.history.back();
                 } else {
                     console.log('You are not sure');
                 }
             });
         };
 
-        $scope.showConfirm = function (ucrid) {
+        $scope.deleteUser = function (ucrid) {
             var confirmPopup = $ionicPopup.confirm({
             title: 'Suppression utilisateur',
             template: "Voulez vous vraiment supprimer l'utilisateur sur cette caméra ?"

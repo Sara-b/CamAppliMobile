@@ -21,7 +21,7 @@
                 .then(function (response) {
                         if (response.status == 200) {
                             console.log($scope.ucr);
-                            window.location.reload(window.history.back());
+                            window.history.back();
                         } else {
                             $scope.message = 'Une erreur est survenue';
                             return $scope.message;
