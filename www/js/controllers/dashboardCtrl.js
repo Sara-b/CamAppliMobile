@@ -4,8 +4,8 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
         $scope.dataStored = storageService.getStorage('data');
         var userid = "";
         
-        if ($scope.dataStored == "") {
-            $state.reload();
+        if ($scope.dataStored == null) {
+            $state.go('mLog.login');
         }
         else {
             $scope.user = JSON.parse($scope.dataStored);
