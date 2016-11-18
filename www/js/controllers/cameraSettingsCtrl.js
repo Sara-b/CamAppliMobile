@@ -94,8 +94,8 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
 
         $scope.deleteCam = function ($titre, $message) {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Suppression caméra',
-                template: "Voulez vous vraiment suppimer cette caméra ?"
+                title: 'Suppression camÃ©ra',
+                template: "Voulez vous vraiment suppimer cette camÃ©ra ?"
             });
 
             confirmPopup.then(function (res) {
