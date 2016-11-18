@@ -27,9 +27,7 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
         });
 
         $scope.turn = function (response) {
-            console.log("turn");
             socket.emit('changeAngle', $scope.camera.angle);
-            console.log($scope.camera.angle);
             socket.on('returnAng', function (ang) {
                 console.log(ang);
             });
