@@ -1,33 +1,33 @@
 ﻿<ion-view view-title="Ajout Utilisateur">
     <ion-content class="padding">
 
-            <!-- <ion-item >
-             <ion-label>Utilisateurs</ion-label>
-             <ion-select [(ngModel)]="gender" ng-options="user.firstname for user in users">
-                 <option ng-repeat="user in users" value="user.id">{{user.firstname}} {{user.lastname}}</option>
-             </ion-select>
-         </ion-item>-->
+        <!-- <ion-item >
+         <ion-label>Utilisateurs</ion-label>
+         <ion-select [(ngModel)]="gender" ng-options="user.firstname for user in users">
+             <option ng-repeat="user in users" value="user.id">{{user.firstname}} {{user.lastname}}</option>
+         </ion-select>
+     </ion-item>-->
 
-            
-            <div class="list">
-                <ion-label>Utilisateurs :</ion-label>
-                <ion-radio ng-repeat="user in users"
-                           value="{{user.id}}"
-                           ng-model="data.selectUser"
-                           name="user">
-                    {{user.firstname}} {{user.lastname}}
-                </ion-radio>
-                
-                <ion-label>Roles :</ion-label>
-                <ion-radio ng-repeat="role in roles"
-                           value="{{role.id}}"
-                           ng-model="data.selectRole"
-                           name="role">
-                    {{role.name}}
-                </ion-radio>
-                </div>
-            <button ng-click="addUser()" class="button button-block button-balanced">
-                Ajouter un utilisateur
-            </button>
-</ion-content>
+
+        <div class="list">
+            <ion-label>Utilisateurs :</ion-label>
+            <ion-radio ng-repeat="user in users"
+                       value="{{user.id}}"
+                       ng-model="data.selectUser"
+                       name="user">
+                {{user.firstname}} {{user.lastname}}
+            </ion-radio>
+
+            <ion-label>Roles :</ion-label>
+            <ion-radio ng-repeat="role in roles"
+                       value="{{role.id}}"
+                       ng-model="data.selectRole"
+                       name="role">
+                {{role.name}}
+            </ion-radio>
+        </div>
+        <button ng-click="addUser()" class="button button-block button-balanced">
+            Ajouter un utilisateur
+        </button>
+    </ion-content>
 </ion-view>

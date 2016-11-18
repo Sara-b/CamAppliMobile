@@ -1,10 +1,11 @@
 <ion-view view-title="Historique {{logs.camera.name}}">
-  <ion-content>
- 	<ion-list ng-repeat="log in logs.slice().reverse()" id="page-list1 cam-tab">
-        <ion-item class="item-icon-right" id="page-list-item4">
-        {{log.createdAt | limitTo: 2 : 8}}/{{log.createdAt | limitTo : 2 : 5}} {{log.createdAt | limitTo : 5 : 11}} - {{log.user.firstname}}.{{log.user.lastname | limitTo : 1 : 0 | uppercase }}: {{log.event}}
-    	</ion-item>
-	</ion-list>
+    <ion-content>
+        <ion-list ng-repeat="log in logs.slice().reverse()" id="page-list1 cam-tab">
+            <ion-item class="item-icon-right" id="page-list-item4">
+                {{log.createdAt | limitTo: 2 : 8}}/{{log.createdAt | limitTo : 2 : 5}} {{log.createdAt | limitTo : 5 :
+                11}} - {{log.user.firstname}}.{{log.user.lastname | limitTo : 1 : 0 | uppercase }}: {{log.event}}
+            </ion-item>
+        </ion-list>
 
-  </ion-content>
+    </ion-content>
 </ion-view>
