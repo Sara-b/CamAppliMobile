@@ -59,6 +59,7 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
             break;
             case "created" :
                 console.log(message);
+                $scope.users.push(message.data);
             break;
             case "destroyed" :
             break;
