@@ -107,4 +107,31 @@
           });
       }
 
+      this.delete = function (data) {
+          return $http({
+              method: 'DELETE',
+              url: 'http://127.0.0.1:1337/usercamerarole/delete/' + data,
+              headers: {
+                  "Content-Type": 'application/x-www-form-urlencoded',
+                  "Authorization": 'JWT ' + storageService.getStorage('token')
+              },
+              dataType: 'json',
+              //transformRequest: function (obj) {
+              //    var str = [];
+              //    for (var p in obj)
+              //        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+              //    return str.join("&");
+              //},
+              //data: data,
+              crossDomain: 'true'
+          })
+              .success(function (response) {
+                  return response;
+              })
+              .error(function (response) {
+                  console.log('Erreur : ' + JSON.stringify(response));
+                  return response;
+              });
+      }
+
   });

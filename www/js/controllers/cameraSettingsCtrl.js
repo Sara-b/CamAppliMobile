@@ -1,5 +1,5 @@
 angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
-  .controller('CameraSettingsCtrl', function($http, $state, $scope, cameraService, $stateParams, storageService, roleService, $sails){
+  .controller('CameraSettingsCtrl', function($http, $state, $ionicPopup, $scope, cameraService, $stateParams, storageService, roleService, $sails){
       console.log('ok');
 
       cameraService.get($stateParams.camid)
@@ -64,5 +64,21 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
             case "destroyed" :
             break;
             }
+      });
+
+      $scope.showConfirm = function (ucrid) {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Suppression',
+            template: 'Etes vou sûr de vouloir supprimer cet utilisateur ?'
         });
+
+        confirmPopup.then(function (res) {
+            if (res) {
+                console.log('You are sure');
+                roleService.delete(ucrid);
+            } else {
+                console.log('You are not sure');
+            }
+        });
+    };
   });
