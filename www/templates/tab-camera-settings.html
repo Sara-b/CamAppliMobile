@@ -19,6 +19,9 @@
                     <p style="margin-top:0px;color:#000000;">Nom : {{camera.name}}</p>
                     <p style="color:#000000;">Etat : {{switchOn}}</p>
                     <p style="color:#000000;">Propriétaire : {{camera.owner.firstname}} {{camera.owner.lastname}}</p>
+                    <button ng-click="deleteCam()" type="submit" class="button button-block button-balanced">
+                        Supprimer la caméra
+                    </button>
                 </div>
             </div>
 
