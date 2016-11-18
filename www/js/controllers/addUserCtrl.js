@@ -26,9 +26,9 @@
           selectRole : -1
       }
 
-      $scope.showAlert = function ($message) {
+      $scope.showAlert = function ($titre, $message) {
           var alertPopup = $ionicPopup.alert({
-              title: 'Ajout utilisateur',
+              title: $titre,
               template: $message
           });
       }
@@ -47,10 +47,10 @@
         }
 
           if ($scope.data.selectUser == -1 || $scope.data.selectRole == -1) {
-              $scope.showAlert("Vous devez sélectionner un utilisateur et un rôle");
+              $scope.showAlert("Ajout utilisateur", "Vous devez sélectionner un utilisateur et un rôle");
           }
           else if (userExist) {
-              $scope.showAlert("Cet utilisateur a déjà été ajouté à la camera");
+              $scope.showAlert("Ajout utilisateur", "Cet utilisateur a déjà été ajouté à la camera");
           }
           else {
               roleService.addUCR($scope.camid, $scope.data.selectUser, $scope.data.selectRole)
@@ -58,6 +58,7 @@
                     console.log(response);
                 });
               window.location.reload(window.history.back());
+              $scope.showAlert("Ajout utilisateur", "Ajout réussi");
           }
       }
   });
