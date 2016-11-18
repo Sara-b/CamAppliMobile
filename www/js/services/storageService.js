@@ -1,5 +1,5 @@
 angular.module('starter.services.storageService', [])
-    .service('storageService', function ($window) {
+    .service('storageService', function ($window, $state) {
         // set sessionStorage
         this.setStorage = function (key, data) {
             return $window.sessionStorage.setItem(key, data);
@@ -18,5 +18,10 @@ angular.module('starter.services.storageService', [])
         // update sessionStorage
         this.updateStorage = function (key, data) {
             return $window.sessionStorage.setItem(key, data);
-        }
+        };
+
+        this.security = function(){
+            if($window.sessionStorage.getItem('user') == null)
+                $state.go('mLog.login');
+        };
     });

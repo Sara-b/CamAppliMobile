@@ -25,7 +25,9 @@ angular.module('starter', [
     'starter.services.cameraService',
     'starter.services.storageService',
     'starter.services.logService',
-    'starter.services.roleService'
+    'starter.services.roleService',
+
+    'starter.directives.backButton'
 ])
 
     .run(function ($ionicPlatform) {

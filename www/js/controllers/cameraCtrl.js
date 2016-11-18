@@ -1,5 +1,5 @@
 angular.module('starter.controllers.CameraCtrl', ['ngSails'])
-    .controller('CameraCtrl', function ($location, $state, $scope, $stateParams, cameraService, logService, storageService, $sails) {
+    .controller('CameraCtrl', function ($location, $state, $scope, $stateParams, cameraService, logService, storageService, $sails, roleService) {
 
         camera = cameraService.get($stateParams.id);
 
@@ -8,12 +8,26 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
 
 
         $scope.camera_turn = false;
+        $scope.user_allowed_switch = false;
+        $scope.user_allowed_turn = false;
         camera.then(function (result) {
             console.log('camera.result', result);
             $scope.data = result;
             $scope.camera = result;
             $scope.camera.angle = 90;
             $scope.camera_turn = true;
+            roleService.get($scope.camera.id).then(function (response) {
+                for (var i = 0; i < response.length; i++) {
+                    if (response[i].camera == $scope.camera.id && response[i].user.id == JSON.parse(storageService.getStorage('data')).user.id) {
+                        if (response[i].role.id == 1 || response[i].role.id == 4) {
+                            $scope.user_allowed_switch = true;
+                            $scope.user_allowed_turn = true;
+                        } else if (response[i].role.id == 3) {
+                            $scope.user_allowed_turn = true;
+                        }
+                    }
+                }
+            });
         });
 
         $sails.on("camera", function (message) {
@@ -68,7 +82,7 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
                 logData = {
                     "user": JSON.parse(storageService.getStorage('data')).user.id,
                     "camera": $stateParams.id,
-                    "event": "Ferme la caméra"
+                    "event": "Ne regarde plus la caméra"
                 };
                 logService.add(logData)
                     .then(function (response) {
