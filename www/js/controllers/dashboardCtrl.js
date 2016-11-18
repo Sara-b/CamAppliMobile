@@ -84,21 +84,23 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
             break;
             case "created" :
               var newCam = message.data;
-              //mettre à jour la couleur du switch apres un update
-              if(newCam.switchOn == true){
-                  newCam.color = "green";
-              } 
-              else{
-                  newCam.color = "red";
-              }
-              //mettre à jour l'icone settings
               if(newCam.owner == userid){
-                  newCam.isOwner = true;
-              } 
-              else{
-                  newCam.isOwner = false;
-              }
-              $scope.cameras.push(newCam);              
+                  //mettre à jour la couleur du switch apres un update
+                if(newCam.switchOn == true){
+                    newCam.color = "green";
+                } 
+                else{
+                    newCam.color = "red";
+                }
+                //mettre à jour l'icone settings
+                if(newCam.owner == userid){
+                    newCam.isOwner = true;
+                } 
+                else{
+                    newCam.isOwner = false;
+                }
+                $scope.cameras.push(newCam); 
+              }                           
             break;
             case "destroyed" :
             console.log("destoy");
@@ -113,6 +115,32 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
                     }
                     i++
                  }
+            break;
+        }
+    });
+
+    $sails.on('usercamerarole', function (message) {
+        console.log("tada");
+        switch(message.verb){
+        case "created" :
+              var newCam = message.data;
+              if(newCam.owner == userid){
+                  //mettre à jour la couleur du switch apres un update
+                if(newCam.switchOn == true){
+                    newCam.color = "green";
+                } 
+                else{
+                    newCam.color = "red";
+                }
+                //mettre à jour l'icone settings
+                if(newCam.owner == userid){
+                    newCam.isOwner = true;
+                } 
+                else{
+                    newCam.isOwner = false;
+                }
+                $scope.cameras.push(newCam); 
+              }                           
             break;
         }
     });
