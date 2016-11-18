@@ -8,6 +8,7 @@ angular.module('starter.controllers.AddCameraCtrl', [])
             cameraService.addCamera($scope.camera)
                 .then(function (response) {
                     console.log(response);
+                    window.location.reload(window.history.back());
                 });
         }
     });
