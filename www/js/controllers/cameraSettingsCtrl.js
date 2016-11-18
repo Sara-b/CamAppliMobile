@@ -73,7 +73,7 @@ angular.module('starter.controllers.CameraSettingsCtrl', ['ngSails'])
                     if (response.status == 200) {
                         console.log($scope.user);
                         $state.go('tab.camera-settings', { camid: $scope.camera.id });
-                        $scope.showAlert("Renomage", "Le renommage de la caméra s'est effectuée avec succès");
+                        $scope.showAlert("Renomage", "Le renommage de la camÃ©ra s'est effectuÃ©e avec succÃ©s");
                     } else {
                         $scope.message = 'Une erreur est survenue';
                         $scope.showAlert("Renomage", $scope.message);
