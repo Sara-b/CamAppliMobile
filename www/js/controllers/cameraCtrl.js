@@ -70,7 +70,7 @@ angular.module('starter.controllers.CameraCtrl', ['ngSails'])
                 logData = {
                     "user": JSON.parse(storageService.getStorage('data')).user.id,
                     "camera": $stateParams.id,
-                    "event": "Ferme la caméra"
+                    "event": "Ne regarde plus la caméra"
                 };
                 logService.add(logData)
                     .then(function (response) {

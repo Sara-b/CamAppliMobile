@@ -125,7 +125,7 @@ angular.module('starter.controllers.DashboardCtrl', ['ngSails'])
             logData = {
                 "user": userid,
                 "camera": camid,
-                "event": "Ouvre la caméra"
+                "event": "Regarde la caméra"
             };
             logService.add(logData)
                 .then(function (response) {
